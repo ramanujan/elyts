@@ -1,0 +1,63 @@
+--- TDD and BDD ---
+
+Nel mondo Ruby una grande enfasi, viene data allo sviluppo di test con tecniche TDD e BDD ovvero
+con strumenti come Test::Unit oppure RSpec. TDD è una pratica che consiste in tre step rpincipali:
+
+1) RED      : scrivi il test
+2) GREEN    : scrivi il codice affinchè il test passi
+3) REFACTOR : ripulisci il codice da boilerplate code, e lo rendi DRY, estrai metodi che fanno una sola 
+              cosa, classi che si occupano di un solo aspetto e così via..
+              
+BDD è simile a TDD ma si orienta e pone l'enfasi sull'interazione delle varie parti di un software piuttosto
+che sul funzionamento dei singoli componenti. Perchè devo scrivere dei test? perchè sei un essere umano e 
+gli umani commettono degli errori. Commettere degli errori è uno dei modi in cui la mente può imparare. 
+Allora ecco che, avere uno strumento che ci informa che abbiamo commesso un errore è davvero molto utile no?
+Infatti spesso non ci accorgiamo che modificando qualcosa nel sistema, abbiamo rotto o reso malfunzionante
+un'altra parte del sistema. Con un pacchetto di test sviluppato, e automatizzato abbiamo invece sempre il
+controllo della situazione. 
+
+Un framework per il testing automatizzato è molto utile. Si pensi a quanto sia meglio a lasciare che si occupi
+un computer di visitare la tua applicazione online, a riempire la form con certi tipi di dato e vedere 
+che tutto fili liscio come l'olio. Ad ogni interazione di sviluppo hai li pronti i tuoi test per vedere se
+i nuovi aggiornamenti del software hanno disturbato qualche cosa. Inoltre verosimilmente prima o poi un
+utente andrà ad eseguire un qualche tipo di azione che non hai considerato nei test e che ha fatto malfunzionare
+il software. Con una base di test automatizzati, puoi facilmente riprodurre lo scenario fallace  eutilizzare
+queste informazioni per aggiustare il bug ! (REGRESSION TESTING)
+
+BDD sfruttano un Domain Specific Language con cui si possono comodamente scrivere i test. In questo modo un
+cliente può capire cosa il test stia testando, e quindi utilizzare i test come ACCEPTANCE TEST. Inoltre in
+questo modo non scriviamo solo i test ma abbiamo una SPECIFICA CONNESSA AL CODICE. Inoltre uno sviluppatore
+può leggere i test e implementare il codice per passare i tests, e infine i test possono essere eseguiti in
+maniera del tutto automatica. 
+
+Quando devi eseguire dei cambiamenti ad una classe di cui hai già scritto i tests, devi anche stare attento
+alla prassi di BDD. Infatti è best-practice cambiare prima i tests in modo che vadano incontro alla tua nuova
+idea e implementazione della classe  e poi cambiare il codice, in altri termini rispetta sempre il ciclo
+red-green-refactor
+
+--- Cucumber --- 
+
+ Mentre RSpec è molto adeguato per Unit Testing, cucumber è preferito per testare INTEGRATION STACK. 
+ Cucumber infatti è molto adeguato per testare dei casi d'uso, ovvero dei processi o delle caratteristche
+ del sistema dal punto di vista dell'utente, piuttosto che per le singole parti. Il cliente solitamente ha
+ una buona rappresentazione di ciò che desidera che tu sviluppi.  
+ 
+ Bisogna quindi parlare con il cliente di tutte le parti dell'applicazione. Queste sono dette STORIES, e 
+ utilizziamo Cucumber per sviluppare queste storie. 
+ 
+ (1) Si parte cone la PIÙ BASILARE DELLE STORIE e si chiede al cliente 	come desidera che questo processo, 
+     questa storia si comporti dal punto di vista del cliente. 
+ 
+ (2) Si scrive uno scenario utilizzando i termini del cliente.
+ 
+ (3) Si scrivono gli STEPs quando è arrivato il tempo di implementare la FUNZIONE della storia
+ 
+ (4) Il client può intanto fornire delle informazioni sulla FORMA della storia (come deve apparire)
+ 
+  
+ 
+  
+   
+
+
+
