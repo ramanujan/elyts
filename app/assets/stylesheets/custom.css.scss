@@ -1,0 +1,49 @@
+@import 'bootstrap';
+@import 'bootstrap-responsive';
+@import 'colors';
+@import 'mixins';   
+
+
+/* General styling */
+
+.debug{
+  border: solid 1px red;
+}
+
+body{
+  padding:60px;
+  margin:0px;
+  background:#f1f1ee; 
+}
+
+a:hover{
+ text-decoration:none; 
+}
+
+.h_cool_line{
+  
+  color:$lightGray;
+  background-color:$lightGray;
+  border-top:1px solid $lightGray;
+  border-bottom:1px solid #fff;
+
+}
+
+.cico{
+  background:url("japanese.jpg");
+}
+
+.hero-cico{
+  @include blue-background;
+  color:#fff; 
+  span{
+    font-size:400%;
+    font-weight:bold;
+    line-height:110%;
+  }
+}
+
+.main_nav{
+  font-size: 150%;  
+  margin-right:1.5%;
+}

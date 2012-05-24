@@ -2,4 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  base_title: "ELYTS"
+  brand: "Powered by Domenico D'Egidio"
+  store_link: "Go to store"
+  admin_store_link: "Go to store admin"
+  support: "Support"
+  account: "Account"
+  logout: "Logout"
+  logged_in : "Logged as"
+  home_heading: "ELYTS E-Commerce environment"
+  presentation: "Do real collaborative e-commerce with ELYTS!"

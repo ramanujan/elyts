@@ -1,0 +1,22 @@
+@import 'colors';
+
+@mixin radius-7 {
+  -moz-border-radius:7px; 
+  -webkit-border-radius:7px; 
+   border-radius:7px;
+}
+
+
+@mixin blue-background{
+  padding:2.5%;
+  background: $lightBlue;
+  background: -webkit-gradient(linear, left top, right bottom, from($deepBlue), to($lightBlue)); /* for webkit browsers */ 
+  background: -moz-linear-gradient(top,  $deepBlue,  $lightBlue); /* for firefox 3.6+ */
+  background: -webkit-linear-gradient(top,$deepBlue, $lightBlue);
+  background: -ms-linear-gradient(top, $deepBlue, $lightBlue);
+  background: -o-linear-gradient(top, $deepBlue, $lightBlue); 
+  border:solid 1px #a1a1a1;  
+  @include radius-7;
+  
+}
+
