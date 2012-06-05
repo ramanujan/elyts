@@ -3,10 +3,14 @@ Elyts::Application.routes.draw do
   get "images/new"
 
   get "static_pages/home"
-
- root :to => 'static_pages#home'
+  
+  get '/heroku_reset', to:"static_pages#heroku_db_reset"
+  
+  get '/heroku_migrate', to:"static_pages#heroku_db_migrate"
  
- namespace :admin do
+  root :to => 'static_pages#home'
+ 
+  namespace :admin do
    root to: 'base#index'
    
    resources :products do
