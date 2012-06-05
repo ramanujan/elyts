@@ -12,3 +12,83 @@ en:
   logged_in : "Logged as"
   home_heading: "ELYTS E-Commerce environment"
   presentation: "Do real collaborative e-commerce with ELYTS!"
+  
+  admin_navbar:
+    home: "Admin home"
+    orders:
+    products:
+    collections:
+    navigation:
+    promotion:  
+  
+  admin:
+    base:
+      index:
+        title: "Administrate your store"
+    
+    products:
+      unavailable: "The product you are looking for could be not found"
+      edit_product: "Edit Product"
+      create_product: "Create Product"
+      delete_product: "Delete Product"
+      description: "Description"
+      properties: "Properties"
+      type: "Product type"
+      vendor: "Vendor"
+      price: "Selling Price"
+      date: "Created at"
+      inventory:
+        label_name: "Inventory"
+        success: "Inventory successful updated!"
+        invalid: "You have to specify a different (numeric) quantity!"
+        submit: "Update Inventory"
+      
+      index:
+        title: "Products"
+        add: "Add new product"
+        import: "Import product"
+        export: "Export product"
+      
+      new:
+        title: "Add new product to store"
+        heading: "New product"
+        description: "Describe your product"
+        price: "Selling price"
+        inventory: "Inventory"
+        submit: "Create Product"
+        product_details: "Insert product's details"
+        product_title: "Product title"
+        product_examples: "( Examples: Strawberries, Cherries, Go Bananas ... )"
+        product_images: "Add images to product"
+        product_suggestions: "( Example: Delicious red fruits... )"
+     
+      edit:
+        product_details: "Editing %{title}'s details" 
+        submit: "Update Product"
+        title: "Editing %{title}" 
+        heading: "Edit product : '%{title}'"
+      
+      update: 
+        error: "There was this exception during update: %{msg}"
+        success: "%{title} was successful updated! View it in "
+        where: "your store"
+        or: " or " 
+        continue: "continue"
+      
+      
+      create:
+         success: "%{title} was successful created! View it in "
+         where: "your store"
+         or: " or continue and "
+         another: "create another product"
+      
+      show:
+         title: "Showing %{title}" 
+         heading: "%{title}'s details"
+         description: "Description"
+         properties: "Properties"
+      
+      delete:
+         confirmation: "Are you sure you want to definitively remove '%{title}' ? "
+         delete_product: "Delete Product"  
+         success: "%{title} was successful deleted!"

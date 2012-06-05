@@ -1,0 +1,92 @@
+<%=form_for [:admin,@product],:html=>{ :multipart => true } do |f| %>
+  
+  <div class="new_product_details"> 
+    <%= @product.new_record? ? t("admin.products.new.product_details"):t("admin.products.edit.product_details",title:@product.title)%>
+  </div>
+  	
+  <br />      
+  
+  <div class="row-fluid"> <!-- Questa riga conterrà title input field e meccanismo per allegare immagini-->
+    <!-- Title zone --> 
+    <div class="span7">
+  
+  		<div>
+    		<%=f.label(:title,t("admin.products.new.product_title"))%>
+    		<span><%=t('admin.products.new.product_examples')%></span>  
+  		</div>  
+       
+ 
+  		<div>
+    		<%=f.text_field :title%>
+  		</div>
+   
+  	</div>
+    
+    <!--Images zone -->
+    <div class="span5">
+    	<div class="row-fluid">
+        	<div class="span1">
+          		<%=image_tag "camera.png"%>
+         	</div>
+            <div class="span10 add_product_image_link">
+
+           		<%=link_to t("admin.products.new.product_images"),'javascript:', 
+           		 id:"add_another_image"
+           		 %>
+           	
+           		 <!-- <p><%=t("heroku_warning")%></p> -->
+           	
+            </div>
+            
+         </div>  
+         <hr class="h_cool_line"/>
+         
+         <div class="row-fluid"> <!-- Altra riga, con lista delle immagini caricate-->
+         
+           <div id="images">
+           	
+           </div>
+         
+         </div>
+      
+      
+      </div>
+    
+    </div> 
+
+   <div>
+    <%=f.label(:description,t("admin.products.new.description"))%>
+    <span><%=t('admin.products.new.product_suggestions')%></span> 
+  </div>  
+       
+ 
+  <div>
+    <%=f.text_area :description%>
+  </div>
+
+  <div>
+    <%=f.label(:price,t("admin.products.new.price"))%> 
+  </div>  
+       
+ 
+  <div>
+    <%=f.text_field :price, placeholder:'0.01', class:'price'%>
+  </div>
+ 
+  <div>
+    <%=f.label(:inventory,t("admin.products.new.inventory"))%> 
+  </div>  
+       
+ 
+  <div>
+    <%=f.text_field :inventory, placeholder:'0', class:'inventory'%>
+  </div>
+  
+ 
+  <div class="metalic">
+  	
+  	<%= @product.new_record? ? (f.submit t("admin.products.new.submit"),:class=>"btn btn-primary btn-large") : 
+  	(f.submit t("admin.products.edit.submit"),:class=>"btn btn-primary")%>
+  </div>   
+
+<%end%> 

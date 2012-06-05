@@ -13,4 +13,6 @@
 //=require    jquery
 //=require    jquery_ujs
 //=require    bootstrap
+//=require    admin/products
+//=require    images
 //=require    custom

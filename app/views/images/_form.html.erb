@@ -1,0 +1,8 @@
+<%=fields_for @product do |f| %>
+  <%= f.fields_for :assets, :child_index=>index do |builder| %>
+    <div>
+      <%=builder.file_field :image %>
+    </div>
+   
+  <%end%>
+<%end%>

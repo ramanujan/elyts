@@ -1,0 +1,39 @@
+<div class="row-fluid product">	
+  
+  <div class="row-fluid"> 	<!-- Previste diverse righe incapsulate in row-fluid via ajax -->
+	<!-- Image -->
+	<div class="span2">
+    
+     <%if product.assets.any? %>
+       <%=image_tag product.assets.first.image(:thumb)%>	
+     <%else%>
+       <%=image_tag "thumb/missing.png"%>
+     <%end%> 
+    </div>	
+	
+	<!-- Title -->
+	<div class="span3">
+	  <%=link_to( [:admin,product] ) do %>
+	    <h2><%=product.title%></h2>
+	  <%end%> 
+	</div>
+	
+	<!--Description -->
+	<div class="span5 product_description_small">
+	  <%=brief(sanitize(product.description))%>
+	</div>
+	
+	<div class="span2">
+      
+      <div class="row-fluid">
+        
+        <%=render :partial=>'update_inventory_form',:locals=>{:product=>product}  %> 
+      </div>
+      
+    </div>
+
+  </div>	
+
+</div>
+
+<hr class="h_cool_line" />

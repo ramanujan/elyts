@@ -1,0 +1,41 @@
+<%=render 'layouts/elyts'%>
+<%=render 'shared/admin_navbar'%>
+
+<div class="row-fluid">
+	<div class="outer_shadow span12">
+		<div class="inner_shadow span12 cico">
+        	
+        	<div class="row-fluid">
+                
+                <!--new heading -->
+	            <div class="row-fluid"> 
+	            
+ 	             	  <h1><%=t("admin.products.edit.heading",title:@product.title)%></h1>
+ 	              	
+	            </div>	
+		        
+		        <hr class="h_cool_line" />
+		        
+		        <!--Errors -->
+  				<div class="row-fluid">
+  					<%=render partial:'shared/errors',locals:{model:@product}%>
+  			     </div>  
+  			
+  			</div>
+            
+            <!--Form -->
+            <div class="row-fluid">
+
+				<div class="span12">
+		
+					<%=render 'form'%>
+          		
+				</div>
+
+			</div>
+
+		
+		
+		</div> 
+	</div>
+</div>

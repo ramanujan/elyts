@@ -1,0 +1,90 @@
+<%=render 'layouts/elyts'%>
+<%=render 'shared/admin_navbar'%>
+
+<div class="row-fluid">
+	<div class="outer_shadow span12">
+		<div class="inner_shadow span12 cico">
+	     
+	    	<!--show heading + thumbnail -->
+	        <div class="row-fluid"> 
+	        	<div class="span8">
+	        	  <h1><%=t("admin.products.show.heading",title:@product.title)%></h1>
+	            </div> 
+	            
+	             <%if @product.assets.any? %>
+	              <div class="span4">
+	              	<%= render 'carousel'%>
+	              </div>
+	             <%else%>
+	               <%=image_tag("thumb/missing.png")%>
+	             <%end%> 
+	        
+	        </div>	
+		    <hr class="h_cool_line" />
+		   
+		    <!-- Flash messages -->
+		   
+		    <div class="row-fluid">
+      			<div class="span12" id="flash_message_zone">
+        			<%=render 'shared/flash_messages'%>
+      			</div>
+    		</div> 
+		   
+		   
+		    <!-- Pulsanti per Edit, Delete --> 
+		    <div class="row-fluid">
+		   
+		   	  <div class="span12">
+		   	    <%=link_to [:edit,:admin,@product], :class=>"btn btn-primary" do%>
+		   	      <i class="icon-edit icon-white"></i>
+		   	      <%=t("admin.products.edit_product")%>
+		   	    <%end%>
+		   	    
+		   	    <%=link_to [:admin,@product],method:"delete",
+		   	    confirm:t("admin.products.delete.confirmation",title:@product.title), 
+		   	    :class=>"btn btn-danger" do%>
+		   	      
+		   	        <i class="icon-trash icon-white"></i>
+		   	        <%=t("admin.products.delete_product")%>
+		   	    
+		   	    <%end%>
+		   	    
+		   	  </div> 
+		   
+		    </div>
+		    <hr class="h_cool_line" />
+		    
+		    <!-- Descrizione del prodotto-->
+		        <div class="row-fluid">
+		    	
+		    	<div class="span8">
+		    		<div class="product_property">
+		    	  		<%=t("admin.products.description")%>
+		    		</div>
+		    	
+		    		<div class="product_description">
+		    	  		<%=sanitize(@product.description)%>
+		    		</div>
+		        </div>  
+		    
+		    </div>
+		    
+		    <!-- Descrizione delle proprietà del prodotto-->
+		    <div class="row-fluid">
+		    
+		    	<div class="span8">
+		    		<div class="product_property">
+		    	  			<%=t("admin.products.properties")%>
+		    		</div>
+		    	</div>
+		      
+		    </div>   
+		    <br />
+		    
+		    <%=render 'product_properties'%>
+		        
+		    
+		    
+		 </div>
+	</div>
+</div>

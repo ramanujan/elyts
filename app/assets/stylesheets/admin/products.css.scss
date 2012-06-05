@@ -1,0 +1,76 @@
+// Place all the styles related to the admin/products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'mixins';
+
+#admin_navbar{
+  li{
+    font-size:120%;
+    
+  }
+}
+
+.new_product_details,.product_property{
+  @include blue-background;  
+  @include fancy-text_on_blue;
+}
+
+input.price{
+  width:10%;
+  margin-top:0px;
+  }
+
+input.inventory{
+  width:10%;
+  margin-top:0px;
+}
+
+.add_product_image_link{
+  font-size:150%;
+  padding-left:4%;
+  padding-top:1.5%;
+  
+}
+
+
+.new_product_details,.product_property{
+  @include blue-background;  
+  @include fancy-text_on_blue;
+}
+
+
+
+.product_property{
+  padding:1%;
+  font-size:150%;
+  margin-top:1%;
+}
+
+.product_description{
+  font-size:150%;
+  font-wheight:bold;
+  line-height:110%;
+  padding-top: 3.5%;
+  padding-bottom:3.5%;
+  padding-left:1%;
+   
+}
+
+.product_description_small{
+  font-weight:bold;
+}
+
+
+.product_attribute{
+  font-size:110%;
+  font-weight:bold;
+  border-right:solid 1px $lightGray;
+  padding-left:1%;
+}
+
+.product_images_label{
+  margin-top:2.5%;
+  padding:1%;  
+  font-size:150%;
+  font-wheight:bold;
+}

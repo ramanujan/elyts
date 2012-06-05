@@ -1,0 +1,22 @@
+<%=javascript_tag do %>
+
+          window.temporaryVariable = "<%= @temp if @temp  %>"
+         
+<%end%>    
+<%unless flash.empty? %>
+  
+  <% flash.each do |type,message| %> 
+    
+    <div class='alert <%="alert-#{type}"%>' >
+     
+       <a class="close" data-dismiss="alert" href="#">close</a>
+       
+       <span>
+          <%=message%>
+       </span>
+           
+     </div> 
+  
+  <%end%>
+
+<%end%>

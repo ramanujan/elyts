@@ -1,0 +1,76 @@
+<div class="row-fluid">
+
+  <div class="span8">
+	  
+	  <div class="row-fluid">
+	    <!-- Product type -->
+	    <div class="span3 product_attribute">
+          <%=t("admin.products.type")%>
+	    </div> 
+		    	    
+        <div class="span8">
+		  <%=@product.class%>
+	    </div> 
+      </div>
+      
+      <hr class="h_cool_line" /> 
+  
+       
+       <div class="row-fluid">
+	    <!-- Product Vendor -->
+	    <div class="span3 product_attribute">
+          <%=t("admin.products.vendor")%>
+	    </div> 
+		    	    
+        <div class="span8">
+		  <%='MY SELF'%>
+	    </div> 
+      </div>
+      
+      <hr class="h_cool_line" /> 
+    
+        <div class="row-fluid">
+	    <!-- Product Price -->
+	    <div class="span3 product_attribute">
+          <%=t("admin.products.price")%>
+	    </div> 
+		    	    
+        <div class="span8">
+		  <%=number_to_currency(@product.price)%>
+	    </div> 
+      </div>
+      
+      <hr class="h_cool_line" /> 
+      
+      
+        <div class="row-fluid">
+	    <!-- Product Inventory -->
+	    <div class="span3 product_attribute">
+          <%=t("admin.products.inventory.label_name")%>
+	    </div> 
+		    	    
+        <div class="span8">
+		  <%=sanitize(@product.inventory.to_s)%>
+	    </div> 
+      </div>
+      
+      <hr class="h_cool_line" /> 
+      
+      <div class="row-fluid">
+	    <!-- Product Inventory -->
+	    <div class="span3 product_attribute">
+          <%=t("admin.products.created_at")%>
+	    </div> 
+		    	    
+        <div class="span8">
+		  <%=@product.created_at%>
+	    </div> 
+      </div>
+      
+      <hr class="h_cool_line" /> 
+  
+      
+  </div> 
+
+</div>
+    	

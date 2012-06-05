@@ -1,0 +1,1 @@
+spinner may be used for feedback in case of long-term form submitting

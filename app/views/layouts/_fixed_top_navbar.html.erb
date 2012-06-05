@@ -5,12 +5,12 @@
             	<span class="icon-eye-open icon-white">
             </a>
         
-            <%=link_to t("brand"),'#',:class=>"brand"%>
+            <%=link_to t("brand"),root_path,:class=>"brand"%>
             <div class="nav-collapse">
             	
             	<ul class="nav">
                 	<li class="active"><%=link_to t('store_link'),'#'%></li>
-                    <li class="active"><%=link_to t('admin_store_link'),'#'%></li>   
+                    <li class="active"><%=link_to t('admin_store_link'),admin_products_path%></li>   
                 </ul>
                 
                 <ul class="nav pull-right"> 
