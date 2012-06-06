@@ -37,6 +37,7 @@ en:
       vendor: "Vendor"
       price: "Selling Price"
       date: "Created at"
+      find_error: "The product you are looking for could be not found"
       inventory:
         label_name: "Inventory"
         success: "Inventory successful updated!"

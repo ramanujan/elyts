@@ -20,6 +20,7 @@ class Admin::ProductsController < Admin::BaseController
       @product = Product.find(params[:id])
      rescue
       @title= t("products.unavailable") 
+      create_product_flash_message('find_error','block')  
       redirect_to admin_products_path
     end
   end

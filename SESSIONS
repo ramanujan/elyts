@@ -1,0 +1,349 @@
+--- Rails Sessions --------------------------------------------------------------------------------------
+
+Si tratta di una struttura Hash-Like che è persiste tra una richiesta e l'altra. Diversamente dal 
+meccanismo raw-cookies questa struttura può mantenere qualsiasi oggetto purchè sia serializzabile. 
+
+In un'applicazione come un negozio elettronico, possiamo utilizzare la sessione per mantenere il 
+carrello della spesa tra una richiesta e l'altra. Ma dove vengono immagazzinati questi simpatici
+oggetti che decidiamo di piazzare dentro la sessione? 
+
+Per default Rails utilizza cookies. Questo impone delle limitazioni sulla grandezza degli oggetti
+che desideriamo salvare nella sessione, e anche introduce questioni di sicurezza. Si noti che nella
+discussione sulla autenticazione e sull'autorizzazione abbiamo approfondito questo scenario. Comunque
+nei cookies possiamo salvare oggetti serializzabili di massimo 4KB. Salvare dati con COOKIES porta ad
+un aumento della banda utilizzata tra client e server. 
+
+I dati spediti via cookie, sono segnati crittograficamente ma non criptati. Quindi un utente malevolo
+può vedere questi dati nei cookie, ma non può corromperli. 
+
+--- Sessions Storage--------------------------------------------------------------------------------------
+
+In generale esistono diversi meccanismi di storing dei dati nella sessione. L'attributo session_store
+di ActionController::Base determina il meccanismo di storage dei dati nella sessione. 
+Questo attributo deve puntare ad una classe che implementa la strategia desiderata. Queste classi sono
+definite nel module CGI::Session. Utilizzeremo dei simboli per nominare la strategia desiderata, e il 
+simbolo verrà trasformato in una classe CamelCase. 
+
+(1)   ActionController::Base#session_store = :cookies_store => 
+      
+      Questo è il meccanismo di default a partire dalla versione 2.0 di Rails.
+      Con questo meccanismo il dato da salvare in sessione viene sottoposto al
+      Marhaling (Serializzazione) e quindi salvato in un cookie. Al massimo possiamo
+      serializzare un componente di non più di 4KB
+
+
+(2)   ActionController::Base#session_store = :p_store
+      
+      Questo è un meccanismo che permette di salvare i dati serializzati dentro un flat-file
+      nel formato PStore. Questo formato mantiene i dati nella loro forma serializzata dentro
+      il file. Questo meccanismo supporta opzioni di configurazione addizionali come
+      :prefix e :tmpdir che possiamo impostare da 'environment.rb' nella directory 'config'
+      inserendo:
+      
+      Rails::Initializer.run do |config|
+        config.action_controller.session_store = CGI::Session::PStore
+        config.action_controller.session_options[:tmpdir] = "/Users/dave/tmp"
+        config.action_controller.session_options[:prefix] = "myapp_session_"
+      
+      
+      
+      
+(3)   ActionController::Base#session_store = :active_record_store
+      
+      Questo è ovviamente il meccanismo che ci permette di salvare i dati della sesisone 
+      all'interno del database. 
+      
+        rake db:sessions:create && rake db:migrate
+      
+      Andrà a generare una tabella da questa migrazione:
+      
+         def change
+           create_table :sessions do |t|
+              t.string :session_id, :null => false
+              t.text :data
+              t.timestamps
+           end
+
+           add_index :sessions, :session_id
+           add_index :sessions, :updated_at
+        
+        end 
+      
+      
+
+(4)   ActionController::Base#session_store = :drb_store
+      
+      DRb è un protocollo che permette ai processi Ruby di condividere degli oggetti attraverso
+      una connessione di rete. Utilizzando questo meccanismo Rails salva i dati della sessione
+      presso un DRb server, gestito esternamente. Istanze multiple della tua applicazione, che 
+      potenzialmente girano su web server diversi in maniera distribuita, in questo modo possono
+      accedere al medesimo DRb store. DRb utilizza la serializzaione (Marshaling) per registrare
+      gli oggetti. 
+       
+       
+(5)   ActionController::Base#session_store = :mem_cache_store
+      
+      memcached is a freely available, distributed object caching system from
+      Danga Interactive.2
+      
+(6)   ActionController::Base#session_store = :memory_store
+      
+      This option stores the session data locally in the application’s memory.
+      Because no serialization is involved, any object can be stored in an in-
+      memory session. As we’ll see in a minute, this generally is not a good
+      idea for Rails applications.
+       
+ 
+(7)   ActionController::Base#session_store = :file_store 
+      
+      Session data is stored in flat files. It’s pretty much useless for Rails appli-
+      cations, because the contents must be strings. This mechanism supports
+      the additional configuration options :prefix, :suffix, and :tmpdir.
+      
+
+--- Session Expiry and Cleanup -----------------------------------------------------------------
+
+Un problema con la gestione della sessione al lato server è che, ogni nuova sessione, aggiunge
+qualche cosa al session-storage. Pertanto eventualmente bisogna fare delle pulizie di tanto in tanto
+altrimenti l'applicazione consumerà tutte le risorse.
+
+Esiste anche un'altra ragione per mettere in ordine le sessioni. Molte applicazioni infatti non 
+desiderano che una sessione sia valida per sempre. Ad esempio un'applicazione
+può far valere la regola che un utente è loggato fintanto che è attivo, oppure per un certo intervallo
+di tempo dall'ultima interazione o finchè non esegue il logout. 
+
+Per le sessioni basate sul meccanismo PStore il metodo migliore per eliminare i dati relativi ad
+una sessione è quello di creare un task periodico (ad esempio con delayed job, oppure con cron) 
+che ispeziona la data dell'ultima modifica dei files nella directory relativa ai dati della sessione
+e cancella quelli che non sono aggiornati da un po di tempo.
+
+Per il meccanismo ActiveRecord si può utilizzare la colonna upadted_at nella tabella sessions.
+Possiamo cancellare tutte le sessioni che non sono state modificate nell'ultima ora, tramite un task
+sweeper che esegue: 
+  
+  delete from sessions where now() - updated_at > 3600
+  
+For DRb-based solutions, expiry takes place within the DRb server process.
+You’ll probably want to record timestamps alongside the entries in the session
+data hash. You can run a separate thread (or even a separate process) that
+periodically deletes the entries in this hash.
+
+In tutti i casi l'applicazione può aiutare questo processoinvocando il metodo reset_session per
+cancellare la sessione quando questa non serve più, come ad esempio quando un utente esegue il 
+logout. 
+
+
+--- Sessione e variabile flash: Meccanismo dettagliato----------------------------------------------------
+ 
+
+Come primo fatto si noti che il protocollo HTTP è per definizione stateless, questo 
+significa ch tra un collegamente e l'altro il server non ricorda nulla del client, 
+cioè in altri termini dal punto di vista del server ogni connessione proviene da un 
+nuovo client sconosciuto, mai visto prima. Pertanto se, tra due connessioni consecutive 
+C1 e C2 , il client necessita di trasportare delle informazioni elaborate in C1 a C2 si
+deve implementare un meccanismo che raggiri questa mancanza di stato, e questo in Rails 
+si fa con il supporto dei cookies. Stiamo allora vedendo in azione il concetto di session 
+tracking  di Rails. 
+          
+Quando la prima richiesta di un client arriva ad un server, Rails imposta un cookie con 
+un numero random univoco, un ID (session ID), e lo spedisce al browser. Il browser se supporta 
+i cookies  lo registra localmente tra gli altri cookies, e ogni volta che si ricollega al medesimo 
+server rispedirà il cookie contenente l'ID. In questo modo l'applicazione può utilizzare l'ID che arriva 
+con il cookie (session ID) per recuperare la SESSIONE relativa all'utente e quindi potrà recuperare
+i dati elaborati in altre connessioni precedenti, dai vari di meccanismi di storing visti in precedenza.
+          
+
+Abbiamo dunque detto che ogni qual volta s'interagisce con Rails, il framework genera un id di sessione 
+univoco. Internamente Rails esegue qualcosa del genere:
+         
+           sid = ActiveSupport::SecureRandom.hex(16) 
+           
+cioè un SESSION ID random, una stringa random codificata base16. La stringa è lunga il doppio del numero 
+fornito come argomento, quindi in questo caso, la stringa prodotta è di 32 caratteri. Questo session id 
+viene REGISTRATO IN UN COOKIE CHE SCADE ALLA CHIUSURA DEL BROWSER, e quindi ogni volta che
+il browser andrà a collegarsi alla nostra applicazione rimanderà questo id univoco relativo alla 
+sessione avviata dal client. 
+         
+Indipendetemente DAL MECCANISMO DI STORING SCELTO PER I DATI, la sessione verrà sempre acceduta allo 
+stesso modo, e cioè tramite l'interfaccia ActionController::Base.session() che ritorna un Hash in cui 
+possiamo inserire i nostri oggetti  e recuperarli purchè tali
+oggetti SIANO SERIALIZZABILI (MARSHALING). Quindi se per esempio, volessimo inserire in sessione 
+l'istanza di User @user basterà fare 
+         
+         session[:user] = @user  
+          
+Ma dove va a finire @user ? come abbiamo visto possiamo scegliere diversi meccanismi di storing. Adesso
+vogliamo vedere in dettaglio come funziona il meccanismo:
+
+        ActionController::Base#session_store = :cookies_store 
+
+Il meccanismo di default prevede quindi che @user venga inserito in un cookie 
+spedito all'utente. Rails dunque non manterrà alcuna informazione in memoria lato 
+server ed eseguirà questo algoritmo implicitamente:
+         
+           a) sid                = ActiveSupport::SecureRandom.hex(16)
+           
+           b) h                  = { :user=>@user, :session_id=>sid, 'flash'=>{} }
+           
+           c) data               = ActiveSupport::Base64.encode64( Marshal.dump(h) )
+       
+           d) escaped_data_value = Rack::Utils.escape(data) # Questo esegue URI escape, ad esempio utile per costruire query string. 
+           
+           e) digest = 'SHA1'    (  diverso da : Digest::SHA2.hexdigest(message)   )
+           
+           f) digest_value = OpenSSL::HMAC.hexdigest( OpenSSL::Digest::Digest.new(digest), secret, data )
+           
+           g) final_output = "#{escaped_data_value}--#{digest_value}"
+           
+           
+Quindi come si vede, viene serializzato( Marshal.dump(h) ) un hash (h) che 
+contiene  l'oggetto che abbiamo inserito in sessione, il session_id generato, 
+e anche la variabile flash che deve mantenere dei dati tra una richiesta e l'altre; 
+questa serializzazione ( una stringa binaria essenzialmente ) 
+viene codificata base 64 e quindi la stringa ottenuta viene filtrata per essere spedita 
+in un cookie con il protocollo HTTP. 
+
+Affinchè la stringa prodotta fino al passo (d) non possa essere corrotta da un utente malizioso, 
+Rails produce un digest criptato della stringa stessa, utilizzando una chiave generata allo startup da 
+Rails e messa in 
+         
+         /initializers/secret_token.rb 
+
+e chiamata 'secret'; alla fine quello che andrà a popolare il cookie sarà :
+           
+             final_output = "#{escaped_data_value}--#{digest_value}"
+             
+final_output verrà ritornato dal client ad ogni interazione con il server, per mezzo del cookie. 
+L'applicazione Rails spezza il contenuto della stringa ottenendo la parte 'escaped_data_value' 
+e anche 'digest_value' e quindi genera un hash (con il medesimo algoritmo di Hashing) da 
+escaped_value e se l'hash  generato è uguale a 'digest_value' allora la stringa non è stata corrotta. 
+
+Se tutto ok,Rails procede con il processo inverso ( unmarshaling )  per riottenere la struttura dati h 
+dalla stringa. 
+           
+Si noti che in un cookie si possono piazzare fino a 4kb di dati. Sembra pochino, 
+ma è ottimo perchè  solitamente i dati che vanno a finire memorizzati in sessione 
+non devono essere troppo complessi. Inoltre questo cookie muore alla chiusura del browser. 
+
+
+--- Rails Cookies ---------------------------------------------------------------------------------------
+                                                                          
+Possiamo memorizzare dei cookies tramite l'istanza di un oggetto ActionDispatch::Cookies 
+disponibile sia ai controllori che al layer della presentazione. Quest'oggetto si comporta 
+come fosse un Hash e quindi per memorizzare oggetti nei cookies basterà fare:
+           
+        cookies[:cookie1] = "Cookie1" 
+        cookies[:cookie2] = [1,2,3]   Il contenuto del cookie salvato nel browser sarà la stringa 1&2&3
+        cookies[:cookie3] = @user     il contenuto del cookie salvato nel browser sarà la stringa 
+                                         %23%3CUser%3A0xad1dfd0%3E (<User:0xad1dfd0>)
+
+Si noti che in generale non possiamo memorizzare qualunque oggetto in questo modo. 
+Infatti non viene fatta alcuna serializzazione ma vengono solo inserite delle 
+strighe che rappresentano i valori del cookie e Rails ne può ricreare i contenuti 
+solo quando possibile ad esempio nella view collegata all'azione dove sono stati 
+impostati i cookie. Quindi se desideri salvare degli oggetti che poi vuoi 
+recuperare in altri momenti e in altri controllori/views devi serializzare l'oggetto 
+e deserializzarlo, ma a questo punto non conviene,conviene piuttosto salvare l'oggetto nella sessione 
+e lasciare il meccanismo di storage quello 
+di default (CookieStore). 
+
+Discorso diverso per :
+           
+            cookies.signed[:remember_token]=@user                 
+         
+questo infatti SERIALIZZA L'OGGETTO E NE CREA ANCHE UN DIGEST. Il digest viene criptato con la chiave 
+in /app/config/initializers/secret_token.rb  
+
+in questo modo non possiamo corrompere l'oggetto @user memorizzato nel cookie perchè non sapremmo quale 
+digest criptato ricreare. Infatti il controllo che fa Rails quando recupero il contenuto del cookie è 
+quello di deserializzare la stringa pervenuta e quindi ricreare un digest per quell'oggetto e vedere 
+se è uguale al digest rispedito dal client. In questa maniera un utente malizioso dovrebbere venire a 
+conoscenza del secret token e della funzione di hashing per corrompere il cookie senza che Rails se 
+ne accorga. 
+          
+In generale questo permette di implementare un meccanismo di autenticazione dell'utente. L'idea è quella 
+di memorizzare in un cookie l'id dell'utente e il salt, impacchettati dentro un array. 
+Quando l'applicazione si connette al server, spedirà l'id e l'hash che verranno utilizzati 
+dall'applicazione per l'autenticazione dell'utente.  
+In particolare tutto il meccanismo di autenticazione si affida a questi metodi che ho spinto dentro un modulo 
+          detto SessionsHelper dove ci sono metodi che verranno utilizzati sia dal controllore SessionsController che 
+          dal layer della presentazione. In pratica se vogliamo dare al controllore la capacità di potersi autenticare, 
+          allora possiamo astrarre in un modulo questa capacità e quindi includerlo negli oggetti interessati.    
+            
+            def sign_in
+            
+            
+            end
+            
+            def current_user
+ 
+              @current_user ||= user_from_remember_token
+           
+            end
+             
+             
+            def user_from_remember_token
+            
+                  User.authenticate_with_salt( *remember_token )
+            end
+
+           
+            def remember_token
+             
+              cookies.signed[:remember_token] || [nil, nil]
+             
+            end
+ 
+         
+         quando dobbiamo autenticare l'utente quindi utilizzeremo current_user()  
+             
+         --- Signin form  ( Action new )---
+         
+         In precedenza nel MODEL relativo a User, abbiamo visto all'opera una form per la 
+         registrazione degli utenti. In quel caso abbiamo utilizzato
+         form_for passandogli un'istanza della classe del MODEL di cui desideravamo creare 
+         la form. Per la sessione non è la stessa cosa in quanto non abbiamo una risorsa Session 
+         come classe del MODEL. In questo caso per costruire la form adeguata per il login, 
+         dobbiamo essere più espliciti con form_for() e passare il nome della risorsa 
+         (che verrà utilizzato nel markup) e l'azione che deve essere collegata alla form, 
+         cioè l'URLda invocare relativo alla risorsa create. Quindi in questo caso lo 
+         utilizzeremo come :
+         
+           form_for :session, url=>session_path 
+             
+         Si veda il file /app/views/sessions/new.html.erb
+            
+      
+         --- Destroying session ( Action destroy() ) ---
+        
+         Qui per la prima volta vediamo all'opera il meccanismo di distruzione di una sessione con Rails. 
+         In effetti Rails promuove l'utilizzo di REST per le operazioni, e quindi per cancellare una risorsa 
+         creata come lo è appunto una sessione, bisogna senz'altro utilizzare il verbo adeguato
+         HTTP che è DELETE. Il browser non supporta l'uso diretto di delete nei link e tantomeno nelle form. 
+         Bisogna raggirare la cosa nascondendo una richiesta del verbo DELETE in una POST. A questo ci pensano 
+         gli helpers di Rails. Infatti utilizzando link_to possiamo fare:
+        
+           link_to link_to "Logout", signout_path,:method=>:delete,  
+                      
+         che produrrà il seguente link:
+       
+           <a href="/signout" class="quiet" data-method="delete" rel="nofollow">Logout</a>
+         
+        Con il supporto del javascript di default incluso con Rails, il click di questo link verrà 
+        individuado da Rails e quindi tramite ajax verrà effettuata la seguente richiesta POST:
+       
+       
+         Content-type    : application/x-www-form-urlencoded
+         Content-length  : 84  // <== CONNESSIONE KEEP ALIVE ?? INDAGARE!
+         _method=delete&authenticity_token=...
+       
+       Pertanto al lato server a Rails arrivano due parametri, uno è l'authenticity_token per le operazione 
+       unsafe come POST,PUT e DELETE, l'altro è _method=delete che indica a Rails che si sta richiedendo 
+       una HTTP DELETE. Pertanto come indicato da routes.rb Rails saprà che si vuole 
+       eliminare una risorsa e quindi accendere il metodo destroy del controllore SessionsController.   
+       
+ 
+      
+
+
+

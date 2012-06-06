@@ -11,5 +11,5 @@ Scenario:
    And I follow "Cucumbers"
    When I follow "Delete Product"
    Then I should see "Cucumbers was successful deleted!"
-   And I should not see "Cucumbers" 
+   And I should not see "Cucumbers" within "h2"
    

@@ -2,6 +2,9 @@ module Admin::ProductsHelper
   
   def create_product_flash_message(action,type,flash_type=:normal) 
     result=case action 
+      when 'find_error'
+        message=t("admin.products.find_error")
+        message
       when 'create_success'
         message=t("admin.products.create.success",:title=>@product.title);
         message+=" "+view_context.link_to( t("admin.products.create.where"),'#' ) 
@@ -23,9 +26,9 @@ module Admin::ProductsHelper
          message=t("admin.products.inventory.invalid")    
      end
      
-     flash_type==:normal ? (flash[type.to_s]=message.html_safe) : 
-       (flash.now[type.to_s]=message.html_safe)
-   
+     (flash_type==:normal) ? (flash[type.to_sym]=message.html_safe) : 
+       (flash.now[type.to_sym]=message.html_safe)
+  
    end
 
   
