@@ -7,7 +7,15 @@ Elyts::Application.routes.draw do
   get '/heroku_reset', to:"static_pages#heroku_db_reset"
   
   get '/heroku_migrate', to:"static_pages#heroku_db_migrate"
- 
+  
+  
+  # Gestione routes per classe Utente
+  
+  get '/utenti/new', to:"utenti#new", as: 'new_utente'
+  
+  post '/utenti/', to: 'utenti#create', as: 'utenti' 
+  
+  
   root :to => 'static_pages#home'
  
   namespace :admin do

@@ -12,7 +12,7 @@ en:
   logged_in : "Logged as"
   home_heading: "ELYTS E-Commerce environment"
   presentation: "Do real collaborative e-commerce with ELYTS!"
-  
+  home_signup: "Sign Up"
   admin_navbar:
     home: "Admin home"
     orders:
@@ -93,3 +93,17 @@ en:
          confirmation: "Are you sure you want to definitively remove '%{title}' ? "
          delete_product: "Delete Product"  
          success: "%{title} was successful deleted!"
+  
+  utenti:
+    new:
+      title: "Create new account"
+      heading: "Create new account at Elyts"
+      utente_name: "Name"
+      utente_examples: "( Username can only contain a-z, A-Z, 0-9 and space )"
+      utente_email: "Email address"
+      utente_password: "Password"
+      utente_password_confirmation: "Confirm password"
+      submit: "Join Us!"
+    create:
+      confirm_registration: "Your account was successfully created!"
+      confirm_registration_explanation: "Please follow the instruction sended to your email and complete the signup process!"

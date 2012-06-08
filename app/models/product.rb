@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id          :integer         not null, primary key
+#  title       :string(255)
+#  description :text
+#  price       :decimal(8, 2)
+#  inventory   :integer         default(0)
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#
+
 class Product < ActiveRecord::Base
   
   has_many :assets

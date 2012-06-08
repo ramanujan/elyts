@@ -10,7 +10,7 @@ gem 'pg'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem "paperclip", "2.7.0" # :git => "git://github.com/thoughtbot/paperclip.git"
-
+gem 'bcrypt-ruby', '3.0.1'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -29,6 +29,8 @@ group :test,:development do
   gem 'sqlite3'
   gem 'rspec-rails','2.9.0'
   gem 'execjs'
+  gem 'annotate', '~> 2.4.1.beta'
+  
 end
 
 group :test do
