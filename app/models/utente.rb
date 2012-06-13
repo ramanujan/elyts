@@ -35,7 +35,13 @@ class Utente < ActiveRecord::Base
   validates(:password, presence:true,confirmation:true,length:{minimum:8})  
   attr_accessible(:name, :email, :password, :password_confirmation)  
   before_save {|utente| utente.email.downcase! } 
+  before_save :create_remember_token 
  
+  def confirm!
+    update_attribute(:confirmed,true)
+  end
+  
+  
   # Infrastruttura per il meccanismo di autenticazione 
   
   def password=(unencrypted_password)
@@ -61,6 +67,13 @@ class Utente < ActiveRecord::Base
   end
   
   
+   def has_valid_token?(token_digest)
+  
+    encrypt(self.remember_token,:password) == token_digest
+  
+  end
+  
+  
   
   # Questo metodo mi serve per l'autenticazione vera e propria
   # rcorda che find_by_email è un ghost method. Ritorna nil se il record 
@@ -69,7 +82,6 @@ class Utente < ActiveRecord::Base
   def self.authenticate(email,password)
     
     user = Utente.find_by_email(email)
-    p user 
     
     if user.nil? 
       return nil
@@ -83,20 +95,49 @@ class Utente < ActiveRecord::Base
   
   
   
+  # used by confirmation durign account creation process
+  
+  def self.authenticate_from_token(token,token_digest)
+    
+  user = Utente.find_by_remember_token(token)
+    logger.info("Inside authenticate_from_token ===> user == #{user}")
+    if user.nil? 
+      return nil
+    end    
+    
+    return user if user.has_valid_token?(token_digest)
+    
+    nil
+    
+  end
+  
+  
+  def create_digitally_signed_remember_token
+    
+      digest = encrypt(remember_token,:password)
+      Rack::Utils.escape( "#{remember_token}--#{digest}" ) # <== È necessarion ? 
+       
+  end
+  
+  
   private 
   
-  def encrypt(message,type=:password)
-    message="#{message}-*-*-#{salt}" if type==:password
-    Digest::SHA2.hexdigest(message)
-  end 
+    def encrypt(message,type=:password)
+      message="#{message}-*-*-#{salt}" if type==:password
+      Digest::SHA2.hexdigest(message)
+    end 
    
  
-  def make_salt
-    
-    self.salt = encrypt("#{password}-*-*-*_*-*-*-#{Time.now.utc}",:salt)   
+    def make_salt
+      self.salt = encrypt("#{password}-*-*-*_*-*-*-#{Time.now.utc}",:salt)   
+    end
   
-  end
- 
+    def create_remember_token
+      self.remember_token = SecureRandom::urlsafe_base64
+    end   
+    
+    
+
 end
   
 

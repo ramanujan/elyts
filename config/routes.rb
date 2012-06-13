@@ -15,6 +15,9 @@ Elyts::Application.routes.draw do
   
   post '/utenti/', to: 'utenti#create', as: 'utenti' 
   
+  # Con put non ci sono riuscito. Mettere _method=put in query string non funziona
+  
+  get '/utenti/:token/confirm', to: 'sessions#confirm_account_and_login', as: 'confirm_account'
   
   root :to => 'static_pages#home'
  
@@ -59,6 +62,6 @@ edit_admin_product GET    /admin/products/:id/edit(.:format) admin/products#edit
 
 =end
 
-
+  resources :sessions, only: [:new, :create, :destroy]
 
 end

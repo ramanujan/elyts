@@ -1,0 +1,22 @@
+<%=form_for :session, url: sessions_path do |f| %>
+  
+  <div>
+    <%=f.label(:email,t("sessions.new.email"))%>
+  </div> 
+  
+  <div>
+    <%=f.email_field(:email)%>
+  </div> 
+  
+  <div>
+    <%= f.label(:password,t("sessions.new.password"))%>
+  </div>
+  
+  <div>
+    <%= f.password_field(:password)%>
+  </div>
+
+  <div>
+    <%= f.submit( t("sessions.new.submit"), :class=>"btn btn-primary btn-large" )%>
+  </div>
+<%end%> 

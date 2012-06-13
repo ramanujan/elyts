@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120607084515) do
+ActiveRecord::Schema.define(:version => 20120612083316) do
 
   create_table "assets", :force => true do |t|
     t.string   "image_file_name"
@@ -35,12 +35,15 @@ ActiveRecord::Schema.define(:version => 20120607084515) do
   create_table "utenti", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "password_digest"
     t.string   "salt"
+    t.boolean  "confirmed",       :default => false
+    t.string   "remember_token"
   end
 
   add_index "utenti", ["email"], :name => "index_utenti_on_email", :unique => true
+  add_index "utenti", ["remember_token"], :name => "index_utenti_on_remember_token", :unique => true
 
 end

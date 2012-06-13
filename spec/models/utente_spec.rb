@@ -57,7 +57,12 @@ describe Utente do
     
   end
    
+  it "should respond to remember_token" do
     
+    subject.should respond_to(:remember_token)
+    
+  end
+  
   context "when name is blank" do
     
     it "should not be valid" do
@@ -148,6 +153,7 @@ describe Utente do
   end
    
    
+  
   context " with a password that don't match password confirmation" do
     
     it "should not be valid" do
@@ -158,6 +164,8 @@ describe Utente do
   
   end 
  
+  
+  
   context " with a blank password and a blank password confirmation " do
   
     it "should not be valid" do
@@ -177,6 +185,8 @@ describe Utente do
       
   end
  
+  
+  
   context " with a password that is too short" do
     
     it "should not be valid" do
@@ -199,11 +209,15 @@ describe Utente do
   
   end
  
+  
+  
   context "with a valid email but invalid password" do
       it "should be not valid" do
          Utente.authenticate(utente_valido.email,'fooobarre').should be_nil
       end
   end 
+  
+  
   
   context "with an invalid email but valid password" do
       it "should be not valid" do
@@ -211,10 +225,23 @@ describe Utente do
       end
   end 
  
+  
+  
   context "with an invalid email and invalid password" do
       it "should be not valid" do
          Utente.authenticate('fooobarre@foo.com','fooofoooofooooooooo').should be_nil
       end
   end 
+  
+  
+  context " with a blank remember token after saving" do
+    
+    before do
+      subject.save
+    end
+    
+    its(:remember_token){ should_not be_blank}
+  
+  end
   
 end

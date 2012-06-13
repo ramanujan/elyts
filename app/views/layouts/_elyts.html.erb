@@ -1,4 +1,15 @@
 <br />
 <div class="row-fluid">
-	<h1 class="elyts"><%=t("base_title")%><%=image_tag("red_flower.png")%></h1>
+	<div class="span10">
+		<h1 class="elyts"><%=t("base_title")%><%=image_tag("red_flower.png")%></h1>
+    </div>
+    
+    <%logger.info("LOGGER(params) =====>#{params} ")%>
+    <%unless logged_in? || ( params[:controller]=='sessions' && (params[:action]=='new' || params[:action]='create') ) %>
+      <div class="span2">
+        <%=link_to t("login"),
+    		      new_session_path,
+    		      class:"btn login"%>
+      </div>
+    <%end%>
 </div>

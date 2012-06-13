@@ -1,3 +1,29 @@
+--- Sessions----
+
+Il più delle volte le sessioni sono utilizzate per implementare il pattern SIGNING IN e in questo
+contesto, vi sono molti modelli per il comportamento della sessione:
+
+1) "FORGETTING" in cui la sessione viene scartata alla chiusura della sessione.
+
+2) "SESSIONE PERMANENTE" in cui la sessione non termina alla chiusura del browser, ma quando
+                         l'utente non esegua esplicitamente il logout
+                         
+3) "REMEMBER ME CHECKBOX" in cui si spunta un check box per ottenere una sessione permanente
+
+4) "SESSIONE CHE SCADE CON SLOT TEMPORALE" 
+
+In ogni caso quando la sessione non è più valida, i dati memorizzati nella sessione devono essere
+cancellati. Questo significa eliminarli dall'Hash che mantiene i dati in memoria, e anche dallo 
+storage-zone.
+
+--------------------------------------------------------------------------------------------------------
+
+In generale è conveniente modellare le sessioni come una risorsa RESTFUL. In pratica l'idea è di poter
+creare una nuova sessione e d poterla distruggere. Diversamente dalla risorsa Utente oppure da Product
+che viene creata nel database, la risorsa Session utilizzerà un cookie (vedi sotto).
+
+
+
 --- Rails Sessions --------------------------------------------------------------------------------------
 
 Si tratta di una struttura Hash-Like che è persiste tra una richiesta e l'altra. Diversamente dal 
@@ -265,10 +291,10 @@ In generale questo permette di implementare un meccanismo di autenticazione dell
 di memorizzare in un cookie l'id dell'utente e il salt, impacchettati dentro un array. 
 Quando l'applicazione si connette al server, spedirà l'id e l'hash che verranno utilizzati 
 dall'applicazione per l'autenticazione dell'utente.  
-In particolare tutto il meccanismo di autenticazione si affida a questi metodi che ho spinto dentro un modulo 
-          detto SessionsHelper dove ci sono metodi che verranno utilizzati sia dal controllore SessionsController che 
-          dal layer della presentazione. In pratica se vogliamo dare al controllore la capacità di potersi autenticare, 
-          allora possiamo astrarre in un modulo questa capacità e quindi includerlo negli oggetti interessati.    
+In particolare tutto il meccanismo di autenticazione si affida a questi metodi che ho inserito dentro un modulo 
+detto SessionsHelper dove ci sono metodi che verranno utilizzati sia dal controllore SessionsController che 
+dal layer della presentazione. In pratica se vogliamo dare al controllore la capacità di potersi autenticare, 
+allora possiamo astrarre in un modulo questa capacità e quindi includerlo negli oggetti interessati.    
             
             def sign_in
             
@@ -339,8 +365,8 @@ In particolare tutto il meccanismo di autenticazione si affida a questi metodi c
        
        Pertanto al lato server a Rails arrivano due parametri, uno è l'authenticity_token per le operazione 
        unsafe come POST,PUT e DELETE, l'altro è _method=delete che indica a Rails che si sta richiedendo 
-       una HTTP DELETE. Pertanto come indicato da routes.rb Rails saprà che si vuole 
-       eliminare una risorsa e quindi accendere il metodo destroy del controllore SessionsController.   
+	       una HTTP DELETE. Pertanto come indicato da routes.rb Rails saprà che si vuole 
+	       eliminare una risorsa e quindi accendere il metodo destroy del controllore SessionsController.   
        
  
       

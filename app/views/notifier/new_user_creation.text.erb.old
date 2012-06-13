@@ -1,0 +1,4 @@
+Dear <%=@user.name%>
+Thank you joining us as Elyts.com
+
+

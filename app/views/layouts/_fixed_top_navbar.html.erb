@@ -17,7 +17,9 @@
                		
                		<li class="active"><%=link_to t('support'),'#'%></li>
                     <li><%=link_to t('account'),'#'%></li>
-                    <li><%=link_to t('logout'),'#'%></li>
+                    <%if logged_in? %>
+                      <li><%=link_to t('logout'), session_path('remove_session'), method:'delete' %></li>
+                    <%end%>
                 </ul> 
                  
              
@@ -30,8 +32,9 @@
                
                 <p class="icon-search icon-white pull-right"></p> 
                 <p class="divider-vertical pull-right"></p>
-                <p class="navbar-text pull-right"><%=t("logged_in")%> <%=link_to "Username","#"%></p>
-                
+                <%if logged_in? %>
+                  <p class="navbar-text pull-right"><%=t("logged_in")%> <%=link_to current_user.email,"#"%></p>
+                <%end%>
                  
             </div> <!-- Nav collapse-->        
         

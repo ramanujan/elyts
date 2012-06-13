@@ -8,17 +8,29 @@
 
 <hr class="h_cool_line"/>
 
+<!-- Flash messages -->
+<div class="row-fluid">
+  <div class="span12" id="flash_message_zone">
+     <%=render 'shared/flash_messages'%>
+   </div>
+</div>
+
 <div class="row-fluid">
 	<div class="span12">    
 		<div class="hero-cico">
 	  		<span><%=t("home_heading")%></span>
 	  		<p><%=t("presentation")%></p>
 	  	    <br />
-	  	    <p>
-	  	    	<%=link_to t("home_signup"),
-    		        	new_utente_path,
-    		        	class:"btn btn-danger signup"%>
-    		</p> 
+	  	    
+	  	    <%unless logged_in? %>
+	  	      <p>
+	  	    	  <%=link_to t("home_signup"),
+    		          	  new_utente_path,
+    		        	  class:"btn btn-danger signup"%>
+    		  </p> 
+	  	    <%end%>
+	  	   	
+	  	
 	  	</div>
 	</div>
     

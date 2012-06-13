@@ -1,0 +1,87 @@
+--- Email Configuration ---
+
+La configuration del meccanismo di notifiche via email, è talmente importante che fa parte della 
+configurazione principale di Rails e coinvolge il blocco 
+
+  Elyts::Application.configure
+
+Se desideriamo la medesima configurazione per tutti gli ambienti di Rails, allora possiamo editare
+il file environment.rb nella directory config. Altrimenti si possono aggiungere differenti configurazioni
+agli appropriati file nella directory config/environments
+ 
+Cosa dobbiamo mettere dentro il blocco di configurazione? dobbiamo mettere diversi statements. 
+
+1) Come vuoi spedire l'email?  
+     
+     config.action_mailer.delivery_method = :smtp | :sendmail | :test
+   
+   The :smtp and :sendmail options are used when you want Action Mailer to
+   attempt to deliver email. You’ll clearly want to use one of these methods in
+   production.
+
+   L'impostazione :test va bene quando eseguiamo gli unit test e i test funzionali.
+   In questo caso una email non sarà realmente spedita; infatti verrà solo aggiunta in coda ad
+   un array accessibile via: 
+   
+     ActionMailer::Base.deliveries 
+   
+   Questo è anche il comportamento di default nell'ambiente di test. In ambiente development il
+   default è :smtp. Se desideriamo che Rails spedisca email durante lo sviluppo questo è ok, altrimenti
+   se desideriamo che anche durante il development non siano spedite le email possiamo aggiungere:
+   in config/environmets/development.rb : 
+   
+     Elyts::Application.configure do
+       config.action_mailer.delivery_method = :test
+     end
+   
+    L'opzione :sendmail delega la spedizione delle email al programma sendmail locale a dove gira 
+    l'applicazione. In generale è in /usr/sbin. Questo meccanismo non è particolarmente portabile 
+    perchè sendmail non sempre è installato in codesta directory e tantomeno è installato. 
+    
+    l'opzione :smtp serve per specificare ad ActionMailer il server SMTP da utilizzare per spedire 
+    le email della nostra applicazione. 
+        
+     This may be the machine running your web application, or it may be a sepa-
+     rate box (perhaps at your ISP if you’re running Rails in a noncorporate envi-
+     ronment). Your system administrator will be able to give you the settings for
+     these parameters. You may also be able to determine them from your own mail
+     client’s configuration.
+     The following are typical settings for Gmail.
+    
+     Elyts::Application.configure do
+     	config.action_mailer.delivery_method = :smtp
+		config.action_mailer.smtp_settings = {:address=> "smtp.gmail.com",
+                                              :port=> 587,:authentication => "plain",
+                                              :user_name=> "example@gmail.com",
+                                              :password=> "*********",
+                                              :enable_starttls_auto => true
+                                              }
+		
+     end
+
+
+--- SENDIG EMAIL--------------------------------------------------------------------------
+
+In Rails un mailer è un'istanza di una classe che è messa in app/mailers.
+Questa classe contiene uno o più metodi ed ogni metodo corrisponde ad un 
+modello di email che l'applicazione può spedire. 
+Per creare il corpo dell'email, questi metodi utilizzano views proprio allo stesso modo
+delle azioni dei controllori. Per iniziare nella nostra applicazione desideriamo spedire 
+un tipo di email a chi si è appena inscritto e deve completare l'iscrizione. 
+
+Quindi pensa al mailer come una classe, un componente che funge da controllore per email. 
+Ogni suo metodo può generare un modello di email con view template, proprio come accade con
+i controllori. Generiamo allora codesto componente: (vedi Notifier)
+
+  rails g mailer Notifier new_user_creation 
+
+
+-- EMAIL TEMPLATE---------------------------------------------------------------------------------
+
+ Con il comando qui sopra, verranno creato il  template: 
+ 
+   new_user_creation.text.erb
+ 
+ Infatti per default l'email è una semplice email di testo.  
+
+        

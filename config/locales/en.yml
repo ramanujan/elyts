@@ -14,12 +14,18 @@ en:
   presentation: "Do real collaborative e-commerce with ELYTS!"
   home_signup: "Sign Up"
   admin_navbar:
-    home: "Admin home"
-    orders:
-    products:
-    collections:
-    navigation:
-    promotion:  
+  confirm_account_creation: "Please confirm account creation following the link below:"
+  welcome: "Welcome to Elyts!"
+  notifier:
+    new_user_creation:
+      subject: "Please confirm your account"  
+    
+  home: "Admin home"
+  orders:
+  products:
+  collections:
+  navigation:
+  promotion:  
   
   admin:
     base:
@@ -104,6 +110,20 @@ en:
       utente_password: "Password"
       utente_password_confirmation: "Confirm password"
       submit: "Join Us!"
+    confirm_account:
+      success: "Your account registration process is completed. Welcome to Elyts!"
+      error: "There was an error during account confirmation. Please contact us at %{email}"
+      exception: "There was an exception during account confirmation. Please retry later or contact us at %{email}" 
     create:
       confirm_registration: "Your account was successfully created!"
       confirm_registration_explanation: "Please follow the instruction sended to your email and complete the signup process!"
+  
+  sessions:
+    new:
+      heading: "Login"
+      submit: "Login"
+      password: "Password"
+      email: "Email"
+      login: "Login"
+    create:
+      auth_error: "Authentication error"
