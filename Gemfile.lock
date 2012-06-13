@@ -190,6 +190,7 @@ DEPENDENCIES
   factory_girl
   jquery-rails
   launchy
+  nokogiri
   paperclip (= 2.7.0)
   pg
   premailer-rails3
