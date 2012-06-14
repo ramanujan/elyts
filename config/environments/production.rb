@@ -70,7 +70,7 @@ end
 Elyts::Application.configure do
 
   config.action_mailer.default_url_options = { host: "stark-sunrise-9483.herokuapp.com" }
-  config.action_mailer.raise_delivery_errors = false # Consigliato da qualche parte 
+  config.action_mailer.raise_delivery_errors = true # Consigliato da qualche parte 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default :charset => "utf-8"
   
