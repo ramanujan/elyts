@@ -1,0 +1,49 @@
+--- RubyGems -------------------------------------------
+
+Si tratta di un framework di gestione dei pacchetti (librerie) per Ruby. È installato di default come
+parte di Ruby 1.9.3
+
+RubyGems 1.8.24 è stato rilasciato in April 27, 2012 e ha aumentato il livello di sicurezza utilizzato
+durante la comunicazione tra RubyGems e i servers https dei repository. 
+
+Se pensi che una gem non funzioni bene per incompatibilità con la nuova implementazione di RubyGems
+allora puoi risolvere il porblema tornando indietro con 
+
+  gem update --system 1.7.2 or gem update --system 1.3.7.
+
+Per aggiornare all'ultima versione utilizzata : 
+
+  gem update --system
+  
+
+Potresti aver sentito che è un best-practice utilizzare bundle exec rake invece che rake per forzare 
+l'utilizzo degli eseguibili specificati nel tuo Gemfile (o una dipendenza specificato in Gemfile.lock)
+invece di altre versioni installate nel sistema. Ad esempio potresti aver sentito di utilizzare 
+bundle exec rake db:migrate. SE UTILIZZI RVM (RUBY VERSION MANAGER) non devi utilizzare bundle 
+exec rake, ma semplicemente rake. Infatti le versioni RVM > 1.11.0 includono rubygems-bundler gem
+per gestire questo. 
+  
+  
+--- RVM ------------------------------------------------------------------------------------------
+È un programma che ci permette di installare gestire e lavorare con ambienti multipli. Ogni ambiente
+ha le sue librerie gems e il suo proprio interprete ruby. Ogni ambiente è individuato da un interprete.
+ 
+RVM ti permette di disporre(deploy) ogni applicazione con il suo proprio ambiente. Avere un insieme 
+preciso di gems per la tua applicazione, evita le problematiche relative a conflitti di versione tra 
+le varie librerie gems esistenti.
+
+Con RVM VENGONO INSTALLATE SOLO LE LIBRERIE GEMS UTILIZZATE EFFETTIVEMENTE E RICHIESTE DALL'APPLICAZIONE 
+RVM inoltre, rende facile eseguire l'update delle gems, switchando verso il nuovo insieme di gems per
+testarlo e lasciano l'originale intatti. 
+
+RVM ha in sistema di gestione delle librerie gem, estremamente flessibile. Si chiama Gem Sets. 
+RVM's 'gemsets' make managing gems across multiple versions of Ruby a non-issue. RVM lets you add a 
+small text file to your application's repository, instead of checking in tons of gems which would 
+needlessly inflate your repository size. Additionally, RVM's gemset management uses a common cache 
+directory, so only one downloaded version of each gem resides on disk rather than several copies.
+
+RVM helps ensure that all aspects of Ruby are completely contained within user space, strongly 
+encouraging safer, non-root use. Use of RVM rubies thus provides a higher level of system security, 
+and therefore reduces risk and cuts overall system downtime. Additionally, since all processes run at the 
+user level, a compromised ruby process cannot compromise the entire system.
+
