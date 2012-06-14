@@ -35,7 +35,7 @@ class Notifier < ActionMailer::Base
     #@url= "http://#{hostname}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
   
     mail to:user.email, subject: 'Elyts, complete the registration process'   
-     p "SONO DOPOOOOOOO!! DENTRO new_user_creation DOPO di mail()"
+    
   end
 
 
