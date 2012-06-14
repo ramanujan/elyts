@@ -28,7 +28,7 @@ class Notifier < ActionMailer::Base
   
   def new_user_creation(user)
     @user = user
-    @url= "http://#{Constant::LOCAL_HOST}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
+    @url= "http://#{Constant::HEROKU_HOST}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
     #require 'socket'
     #hostname = Socket.gethostname
     #@url= "http://#{hostname}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
