@@ -29,11 +29,13 @@ class Notifier < ActionMailer::Base
   def new_user_creation(user)
     @user = user
     @url= "http://#{Constant::LOCAL_HOST}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
+    p "SONO QUI CAZZO; MANNAGGIA MO SE NE VA!! DENTRO new_user_creation prima di mail()"
     #require 'socket'
     #hostname = Socket.gethostname
     #@url= "http://#{hostname}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
   
     mail to:user.email, subject: 'Elyts, complete the registration process'   
+     p "SONO DOPOOOOOOO!! DENTRO new_user_creation DOPO di mail()"
   end
 
 
