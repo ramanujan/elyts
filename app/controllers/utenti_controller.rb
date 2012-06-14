@@ -10,7 +10,7 @@ class UtentiController < ApplicationController
   def create
     @utente = Utente.new params[:utenti]
     if @utente.save 
-     # Notifier.new_user_creation(@utente).deliver
+      Notifier.new_user_creation(@utente).deliver
       flash.now[:block] = t("utenti.create.created")
       render "confirm_registration"    
     else
