@@ -31,10 +31,9 @@ Given(/^there are the following users:$/) do |table|
     #@user.update_attribute(:admin,(attributes[:admin]=='true'))   
     @user.confirm! if (confirmed.nil?) || (confirmed=='true')
     @users << @user
-    p "_____________________________________________________"
-    p Utente.find_by_email(@user.email)
+   
   end
-  p "@users=========>#{@users}"
+ 
 end
 
 

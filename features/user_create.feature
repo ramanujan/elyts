@@ -15,3 +15,7 @@ Scenario: Sign up
   Then I should see "Your account was successfully created!" 
   And I should see "Please follow the instruction sended to your email and complete the signup process!"
   
+  And "domenico@valid.com" should receive an email
+  And "domenico@valid.com" opens the email with subject "Elyts account confirmation"
+  When they click the first link in the email
+  Then I should see "Your account was successfully confirmed"

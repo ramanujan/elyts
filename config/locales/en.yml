@@ -18,7 +18,7 @@ en:
   welcome: "Welcome to Elyts!"
   notifier:
     new_user_creation:
-      subject: "Please confirm your account"  
+      subject: "Elyts account confirmation"  
     
   home: "Admin home"
   orders:
@@ -111,7 +111,7 @@ en:
       utente_password_confirmation: "Confirm password"
       submit: "Join Us!"
     confirm_account:
-      success: "Your account registration process is completed. Welcome to Elyts!"
+      success: "Your account creation process is completed. Welcome to Elyts!"
       error: "There was an error during account confirmation. Please contact us at %{email}"
       exception: "There was an exception during account confirmation. Please retry later or contact us at %{email}" 
     create:
