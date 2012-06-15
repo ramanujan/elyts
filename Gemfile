@@ -43,7 +43,7 @@ group :test do
   gem 'factory_girl'
   gem "launchy"
   gem 'email_spec'
-  gem 'action_mailer_cache_delivery'
+  # gem 'action_mailer_cache_delivery'
 end
 
 group :production do

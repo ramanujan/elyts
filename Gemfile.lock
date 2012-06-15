@@ -1,8 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    action_mailer_cache_delivery (0.3.2)
-      actionmailer (~> 3.0)
     actionmailer (3.2.6)
       actionpack (= 3.2.6)
       mail (~> 2.4.4)
@@ -202,7 +200,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  action_mailer_cache_delivery
   annotate (~> 2.4.1.beta)
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass

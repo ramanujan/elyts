@@ -1,3 +1,4 @@
+
 Given(/^I am on the (.+)$/) do |page_name|
  
  # path_to è un helper di cucumber che ho definito in support/paths.rb
@@ -44,8 +45,15 @@ end
 
 
 Then(/^show me the page$/) do
+ 
  save_and_open_page
+  
 end
+
+Then(/^show me the email$/) do
+  p current_email
+end
+
 
 When(/^I attach the file "([^"]*)" to "([^"]*)"$/) do |path,file_field|
 

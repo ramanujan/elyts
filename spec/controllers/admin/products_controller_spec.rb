@@ -30,5 +30,16 @@ describe Admin::ProductsController do
   
   end
   
+  describe 'when updating inventory with ajax control' do
+      
+      it "should change inventory column" do
+        expect {
+          put :inventory, :inventory=>100, :id=>product.id
+        }.to change{Product.find(product.id).inventory}.to(100)                   
+      end
+  
+  end
+  
+  
   
 end

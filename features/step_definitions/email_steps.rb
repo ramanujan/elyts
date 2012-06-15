@@ -180,7 +180,7 @@ When /^(?:I|they) follow "([^"]*?)" in the email$/ do |link|
 end
 
 When /^(?:I|they) click the first link in the email$/ do
-  click_first_link_in_email
+  click_first_link_in_email(current_email)
 end
 
 #
