@@ -29,9 +29,11 @@ Given(/^there are the following users:$/) do |table|
       
 =end
     confirmed = attributes.delete("confirmed")  
+    admin = attributes.delete("admin")
     @user= Factory.create(:utente,attributes)
     #@user.update_attribute(:admin,(attributes[:admin]=='true'))   
     @user.confirm! if (confirmed.nil?) || (confirmed=='true')
+    @user.admin! if (admin=="true")
     Notifier.new_user_creation(@user).deliver if confirmed=='false'
     @users << @user
    
@@ -49,5 +51,16 @@ Given(/^I am logged in via confirmation email as "([^"]*)"$/) do |email|
            When they follow "COMPLETE ACCOUNT CREATION PROCESS" in the email
            Then I should see "Your account creation process is completed. Welcome to Elyts!" 
  }
+
+end
+
+
+Given(/^I am signed in as an administrator/) do 
+  steps %Q{ Given there are the following users:
+              | email                    | admin       |
+              | admin@example.com        | true        |
+   
+            And I am signed in as "admin@example.com"
+  }
 
 end

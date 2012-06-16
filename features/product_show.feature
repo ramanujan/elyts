@@ -4,6 +4,7 @@ Feature: Accessing a product from a list
   In modo da poter sceglierne uno in particolare per gestirlo
 
 Scenario: Show a product
+  Given I am signed in as an administrator
   Given there is a product named "Cucumbers"
   And I am on the homepage
   And I follow "Go to store admin"

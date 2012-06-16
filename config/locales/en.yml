@@ -31,7 +31,8 @@ en:
     base:
       index:
         title: "Administrate your store"
-    
+      authorize_admin:
+        error: "You aren't authorized to perform this action" 
     products:
       unavailable: "The product you are looking for could be not found"
       edit_product: "Edit Product"

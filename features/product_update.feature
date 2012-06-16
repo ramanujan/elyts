@@ -5,6 +5,7 @@ Feature: Update product
 
 
 Background: 
+  Given I am signed in as an administrator
   Given there is a product named "Cucumbers"
   And I am on the homepage
   And I follow "Go to store admin"

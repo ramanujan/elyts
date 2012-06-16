@@ -3,6 +3,7 @@ Feature: Accessing a product's list
   Voglio poter visualizzare una lista di tutti i prodotti
   
 Scenario: Show a product
+  Given I am signed in as an administrator
   Given there is a product named "Cucumbers"
   And there is a product named "Strawberries"
   And there is a product named "Cherries"

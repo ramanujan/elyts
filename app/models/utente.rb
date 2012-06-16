@@ -41,6 +41,13 @@ class Utente < ActiveRecord::Base
     update_attribute(:confirmed,true)
   end
   
+  def admin!
+    update_attribute(:admin,true)
+  end
+  
+  def is_admin?
+    admin
+  end
   
   # Infrastruttura per il meccanismo di autenticazione 
   

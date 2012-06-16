@@ -4,6 +4,8 @@ Feature: Create product
 	In modo che gli utenti buyer del negozio possano fare shopping
 
 Background:
+ 
+  Given I am signed in as an administrator  
   Given I am on the homepage
   And I follow "Go to store admin"
   And I follow "Products"
