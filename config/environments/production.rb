@@ -83,8 +83,8 @@ Elyts::Application.configure do
     
     # Per evitare di salvare username e password nel repository git
     
-    user_name: "pater.patronis@gmail.com", #ENV["GMAIL_USERNAME"],
-    password:  "domenico9579degidio"      #ENV["GMAIL_PASSWORD"]
+    user_name: ENV["GMAIL_USERNAME"],
+    password:  ENV["GMAIL_PASSWORD"]
   }
 
 end

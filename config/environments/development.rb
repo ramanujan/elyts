@@ -50,8 +50,8 @@ Elyts::Application.configure do
     domain: "stark-sunrise-9483.herokuapp.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "pater.patronis@gmail.com", #ENV["GMAIL_USERNAME"],
-    password:  "domenico9579degidio"      #ENV["GMAIL_PASSWORD"]
+    user_name: ENV["GMAIL_USERNAME"],
+    password:  ENV["GMAIL_PASSWORD"]
   }
 
 end
