@@ -1,0 +1,23 @@
+<div class="row-fluid product">	
+  
+  <div class="row-fluid"> 	<!-- Previste diverse righe incapsulate in row-fluid via ajax -->
+	<!-- Image -->
+	<div class="span6">
+    
+      <%= image_tag("unknown.png")%>
+      
+    </div>	
+	
+	<!-- Name -->
+	<div class="span6">
+	  <%=link_to( admin_user_path(user.id) ) do %>
+	    <h2><%=user.email%></h2>
+	  <%end%> 
+	</div>
+	
+	
+  </div>	
+
+</div>
+
+<hr class="h_cool_line" />

@@ -1,6 +1,7 @@
 class Admin::BaseController < ApplicationController
   
   include SessionsHelper
+  before_filter :authorize_admin! # I filtri vengono ereditati. 
   
   def index
     @title=t("admin.base.index.title")
@@ -15,8 +16,9 @@ class Admin::BaseController < ApplicationController
     
     def authorize_admin!
       unless logged_in?
-        redirect_to(new_session_path)  
-        return 
+         store_location # <== Mi serve per ricordare il link richiesto, ma di cui ci serve autenticazione
+         redirect_to(new_session_path) 
+         return
       end    
     
       unless current_user.admin?

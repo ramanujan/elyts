@@ -69,22 +69,22 @@ end
 
 Elyts::Application.configure do
 
-  config.action_mailer.default_url_options = { host: "stark-sunrise-9483.herokuapp.com" }
-  config.action_mailer.raise_delivery_errors = true # Consigliato da qualche parte 
+  config.action_mailer.default_url_options = { :host =>ENV["ELYTS_HOSTNAME"] }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
+
   
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
-    domain: "stark-sunrise-9483.herokuapp.com",
-    authentication: "plain",
+    domain: ENV["ELYTS_HOSTNAME"],
+    authentication: :plain,
     enable_starttls_auto: true,
-    
-    # Per evitare di salvare username e password nel repository git
-    
     user_name: ENV["GMAIL_USERNAME"],
     password:  ENV["GMAIL_PASSWORD"]
   }
+
 
 end

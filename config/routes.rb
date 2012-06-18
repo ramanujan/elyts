@@ -1,5 +1,7 @@
 Elyts::Application.routes.draw do
  
+  get "users/new"
+
   get "images/new"
 
   get "static_pages/home"
@@ -31,6 +33,8 @@ Elyts::Application.routes.draw do
      end
  
    end
+   
+   resources :users 
  
  end
 

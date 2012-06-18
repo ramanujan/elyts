@@ -13,20 +13,21 @@ en:
   home_heading: "ELYTS E-Commerce environment"
   presentation: "Do real collaborative e-commerce with ELYTS!"
   home_signup: "Sign Up"
-  admin_navbar:
   confirm_account_creation: "Please confirm account creation following the link below:"
   welcome: "Welcome to Elyts!"
   notifier:
     new_user_creation:
       subject: "Elyts account confirmation"  
-    
-  home: "Admin home"
-  orders:
-  products:
-  collections:
-  navigation:
-  promotion:  
   
+  admin_navbar:  
+    home: "Admin home"
+    orders: "Orders"
+    products: "Products"
+    collections: "Collections"
+    navigation: "Navigation"
+    promotion: "Promotion" 
+    users: "Users"
+ 
   admin:
     base:
       index:
@@ -100,7 +101,18 @@ en:
          confirmation: "Are you sure you want to definitively remove '%{title}' ? "
          delete_product: "Delete Product"  
          success: "%{title} was successful deleted!"
-  
+    users:
+      new:
+        heading: "Create new user"
+        title: "Create new user"
+        administrator_user: "Administrator user"
+        submit: "Create User"
+      created: "Administrator %{email} was successfully created"
+      index:
+        title: "Users"
+        add: "Add new user"
+        import: "Import user"
+        export: "Export user"
   utenti:
     new:
       title: "Create new account"
@@ -118,7 +130,7 @@ en:
     create:
       confirm_registration: "Your account was successfully created!"
       confirm_registration_explanation: "Please follow the instruction sended to your email and complete the signup process!"
-  
+      created: "Normal user %{email} was successfully created"
   sessions:
     new:
       heading: "Login"

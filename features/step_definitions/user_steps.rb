@@ -10,7 +10,7 @@ end
 
 
 Given(/^there is the user "([^"]*)"$/) do |email|
-  @user = Factory.create(:utente,email:email) 
+  @user = FactoryGirl.create(:utente,email:email) 
 end
 
 
@@ -30,7 +30,7 @@ Given(/^there are the following users:$/) do |table|
 =end
     confirmed = attributes.delete("confirmed")  
     admin = attributes.delete("admin")
-    @user= Factory.create(:utente,attributes)
+    @user= FactoryGirl.create(:utente,attributes)
     #@user.update_attribute(:admin,(attributes[:admin]=='true'))   
     @user.confirm! if (confirmed.nil?) || (confirmed=='true')
     @user.admin! if (admin=="true")

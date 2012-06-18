@@ -17,7 +17,7 @@ require 'spec_helper'
 
 describe Admin::ProductsController do
 
-  let(:product) do
+ let(:product) do
     Factory.create(:product)
   end
   
@@ -33,6 +33,7 @@ describe Admin::ProductsController do
     user.admin!
     user
   end 
+  
   
   context " When standard (signed in but not admin) users want to do something with a product " do
      

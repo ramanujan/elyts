@@ -12,7 +12,7 @@ class Admin::ProductsController < Admin::BaseController
  
   include(::Admin::ProductsHelper)  # N.B. DEVI INCLUDERE IL MODULO MANUALMENTE
   
-  before_filter :authorize_admin! # metodo private in BaseController 
+  
   before_filter :find_product, only:[:show,:inventory,:edit,:update]
    
   

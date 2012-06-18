@@ -108,7 +108,7 @@ class SessionsController < ApplicationController
     
     if utente              
       utente.confirmed? ? login(utente) : flash[:error]=t("sessions.create.confirm_required")
-    redirect_to(root_path)
+    redirect_back_or(root_path)
     else
       flash.now[:error]=t("sessions.create.auth_error")
       render(:new)

@@ -7,11 +7,14 @@ Background:
   Given there are the following users:
   | email                      | admin       | 
   | normal@example.com         | false       | 
+  | admin@example.com          | true        |
   
-  And I am signed in as "normal@example.com"
 
 Scenario: Logout in a normal way (following the Logout link)  	
+  And I am signed in as "normal@example.com"
   When I follow "Logout"
   Then I should see "Login"
   And I should see "Sign Up"
   And I should not see "Logout"
+
+   

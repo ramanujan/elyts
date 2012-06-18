@@ -8,6 +8,10 @@
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  password_digest :string(255)
+#  salt            :string(255)
+#  confirmed       :boolean         default(FALSE)
+#  remember_token  :string(255)
+#  admin           :boolean         default(FALSE)
 #
 
 

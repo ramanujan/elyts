@@ -17,6 +17,8 @@
   
 =end
 
+require 'socket' # Mi serve per recuperare l'ip address della macchina
+
 class Notifier < ActionMailer::Base
   default from: "Elyts <pater.patronis@gmail.com>"
 
@@ -28,12 +30,34 @@ class Notifier < ActionMailer::Base
   
   def new_user_creation(user)
     @user = user
-    @url= "http://#{Constant::WORLDWIDE_HOST}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
-      #require 'socket'
-      #hostname = Socket.gethostname
-      # => @url= "http://#{hostname}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
+    hostname=nil
+    Rails.env=='production' ? hostname=Constant::HEROKU_HOST : hostname=Constant::WORLDWIDE_HOST
+    @url= "http://#{hostname}/utenti/#{user.create_digitally_signed_remember_token}/confirm"
     mail(to:user.email, subject: "Elyts account confirmation") 
+    
   end
+  
+  private
+    
+   # The above code does NOT make a connection or send any packets (to 64.233.187.99 which is google). 
+   # Since UDP is a stateless protocol connect() merely makes a system call which figures out how 
+   # to route the packets based on the address and what interface (and therefore IP address) 
+   # it should bind to. 
+   # addr() returns an array containing the family (AF_INET), local port, and local address 
+   # (which is what we want) of the socket.
 
-
+    
+    def local_ip
+      # turn off reverse DNS resolution temporarily
+      orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true  
+     
+      UDPSocket.open do |s|
+        s.connect '64.233.187.99', 1
+        s.addr.last
+      end
+    ensure
+      Socket.do_not_reverse_lookup = orig # restore reverse DNS lookup   
+    end
+    
+    
 end

@@ -61,7 +61,7 @@ When(/^I attach the file "([^"]*)" to "([^"]*)"$/) do |path,file_field|
 
 end
 
-
-Given(/^there is a product named "([^"]*)"$/) do |title|
- @product = FactoryGirl.create(:product, title:title)
+Given(/^I check "([^"]*)"$/) do |admin_checkbox|
+  check(admin_checkbox)
 end
+
