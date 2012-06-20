@@ -16,3 +16,11 @@
   </p>
 
 <%end%>
+
+<%@ls_compiled_assets.split('\n').each do |line| %>
+
+  <p>
+  	<strong><%=line%></strong>
+  </p>
+
+<%end%>
