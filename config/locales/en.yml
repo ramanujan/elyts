@@ -141,3 +141,7 @@ en:
     create:
       auth_error: "Authentication error"
       confirm_required: "An email with istructions was sended to your account, please follow the istructions there and confirm your account before login"
+  
+  store:
+    index:
+      show: "Selected products (%{number})"
