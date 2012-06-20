@@ -10,6 +10,8 @@ Elyts::Application.routes.draw do
   
   get '/heroku_migrate', to:"static_pages#heroku_db_migrate"
   
+  get '/heroku_ls', to:"static_pages#heroku_ls"
+  
   # JQuery attempts
   get '/jquery_sliding_effects', to: "static_pages#jquery_sliding_effects"
   
