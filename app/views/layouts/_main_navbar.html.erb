@@ -1,11 +1,32 @@
 <div class="row-fluid">
   
   <div class="span12">
-    <span class="main_nav first"><%=link_to 'HOME',root_path%></span>
-    <span class="main_nav"><%=link_to 'CATALOG','#'%></span>
-    <span class="main_nav"><%=link_to 'BLOG','#'%></span>
-    <span class="main_nav"><%=link_to 'ABOUT US','#'%></span>
-  </div>
+    
+    <ul id="main_nav_bar">
+    
+    	<li><%=link_to 'HOME',root_path%></li>
+       
+        <li id="catalog" class="slide_down">
+        	<%=link_to 'CATALOG','#'%>
+            <ul class="actions">
+              <div class="inner_shadow cico">
+                <li><%=link_to t("All products"),  store_path%></li>  
+                <hr class="h_cool_line" />
+                <li><%=link_to t("bluetooth"),'#'%></li>
+                <li><%=link_to t("phone"),    '#'%></li>
+                <li><%=link_to t("cool"),     '#'%></li>
+              </div>
+            
+            </ul>
+        
+        </li>
+        
+        <li><%=link_to 'BLOG','#'%></li>
+        <li><%=link_to 'ABOUT US','#'%></li>
+        
+    </ul>
+    
+ </div>
 
 </div>
-<br />
+

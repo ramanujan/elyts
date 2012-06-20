@@ -1,6 +1,6 @@
 Elyts::Application.routes.draw do
  
-  get "users/new"
+  get "store/index", as: 'store'
 
   get "images/new"
 
@@ -9,6 +9,12 @@ Elyts::Application.routes.draw do
   get '/heroku_reset', to:"static_pages#heroku_db_reset"
   
   get '/heroku_migrate', to:"static_pages#heroku_db_migrate"
+  
+  # JQuery attempts
+  get '/jquery_sliding_effects', to: "static_pages#jquery_sliding_effects"
+  
+  get '/css_positioning', to: "static_pages#css_positioning"
+  
   
   
   # Gestione routes per classe Utente

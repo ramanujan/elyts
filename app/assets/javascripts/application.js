@@ -15,4 +15,7 @@
 //=require    bootstrap
 //=require    admin/products
 //=require    images
+//=require    static_pages
+//=require    main_nav_bar
 //=require    custom
+

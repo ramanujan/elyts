@@ -1,0 +1,20 @@
+<!-- Definito comunque dentro container-fluid di bootstrap !! -->
+<%=render 'layouts/header'%>
+<%=render 'layouts/banner'%>
+<hr class="h_cool_line" />
+
+<div class="row-fluid">
+  <div class="span12">
+  <header>
+    <ul>
+      <li>Already registered?</li>
+      <li> 
+    	<!--Nel caso che il client non abiliti javascript, login.html presenterà la form -->
+    	<%=link_to("Login",new_session_path,id:"login")%> 
+        <%=render('sessions/form')%>
+      </li>
+    </ul>
+  </header>
+  </div>
+</div>
+<hr class="h_cool_line"/>

@@ -1,0 +1,140 @@
+<!--Il posizionamento di default è static. Questo prevede di disporre le scatole secondo la loro normale
+	proprietà display, in generale block oppure inline. -->
+
+<div style="width:300px; height: 100px; border: 1px solid yellow;">
+	Dentro yellow box
+</div>
+
+<div style="width:300px; height: 300px; border: 1px solid black; margin-bottom:10px;">
+	<div style="width:200px; height: 200px; border: 1px solid red;">
+      red box, inside black box  		
+	</div>
+    <span style="border: 1px solid #c1c2c3;">Span 1</span>
+    <span style="border: 1px solid #c1c2c3;">Span 2</span> 
+</div>
+
+
+<!--Il posizionamento absolute rimuove l'elemento dal normale flusso delle scatole, e cioè dal
+	flusso visto qui sopra, per posizionarlo in rapporto ad un suo elemento container, cioè un elemento
+	che ha posizionamento DIVERSO da static, e che è suo antenato nell'albero degli elementi. 
+	
+	Se un tale elemento container non esiste, l'elemento viene posizionato rispetto l'elemento html
+	che rappresenta il viewport in questo caso. 
+	
+	-->
+
+
+<div style="width:300px; height: 100px; border: 1px solid yellow;">
+	Dentro yellow box
+</div>
+
+<div style="width:300px; height: 300px; border: 1px solid black; margin-bottom:10px;">
+	
+	<!-- Verrà posizionato rispetto viewport -->
+	<div style="width:200px; height: 200px; border: 1px solid red; position:absolute; top:500px; left:20px;">
+      red box, positionated in absolute manner, rispect html element   		
+	</div>
+    
+    <span style="border: 1px solid #c1c2c3;">Span 1</span>
+    <span style="border: 1px solid #c1c2c3;">Span 2</span> 
+</div>
+
+
+
+
+
+<div style="width:300px; height: 100px; border: 1px solid yellow;">
+	Dentro yellow box
+</div>
+
+<div style="width:300px; height: 300px; border: 1px solid black; margin-bottom:10px; position:relative;">
+	
+	<!-- Verrà posizionato rispetto al div con contorno black, poichè black ha position relative ! -->
+	<div style="width:200px; height: 200px; border: 1px solid red; position:absolute; top:10px; left:10px;">
+      red box, positionated in absolute manner, rispect balck relative box   		
+	</div>
+    
+    <span style="border: 1px solid #c1c2c3;">Span 1</span>
+    <span style="border: 1px solid #c1c2c3;">Span 2</span> 
+</div>
+
+
+<!--Anche il posizionamento relativo come quello assoluto ci permette di posizionare elementi  
+	al di fuori del flusso normale. La differenza è che prima verranno piazzati come prevede il normale
+	flusso, poi avranno applicato un offset calcolato in rapporto al loro container -->
+
+
+<div style="width:300px; height: 100px; border: 1px solid yellow;">
+	Dentro yellow box
+</div>
+
+<div style="width:300px; height: 300px; border: 1px solid black; margin-bottom:10px; position:relative;">
+	
+	<!-- Verrà posizionato rispetto al div con contorno black in maniera relativa, 
+		poichè ha position relative ! -->
+	
+	<div style="width:200px; height: 200px; border: 1px solid red; position:relative; top:10px; left:10px;">
+      red box, positionated in absolute manner, rispect balck relative box   		
+	</div>
+    
+    <span style="border: 1px solid #c1c2c3;">Span 1</span>
+    <span style="border: 1px solid #c1c2c3;">Span 2</span> 
+</div>
+
+
+<!-- Anche l'attributo float toglie l'elemento dal suo normale flusso. In pratica l'elemento viene 
+	 posizionato secondo quanto indicato da float. L'elemento viene spostato verso il lato destro o 
+	 verso il lato sinistro del suo elemento contenitore.  -->
+
+
+<div style="width:300px; height: 100px; border: 1px solid yellow;">
+	Dentro yellow box
+</div>
+
+<div style="width:300px; height: 300px; border: 1px solid black; margin-bottom:10px; position:relative;">
+	
+	<!-- Verrà posizionato rispetto al div con contorno black in maniera float:right, 
+	 -->
+	Il testo dentro il container scorre verso la parte opposta indicata da float 
+	(sinistra in questo caso)
+	<div style="width:200px; height: 200px; border: 1px solid red; float:right">
+      red box, positionated with float:right, rispect balck relative box   		
+	</div>
+    
+    <span style="border: 1px solid #c1c2c3;">Span 1</span>
+    <span style="border: 1px solid #c1c2c3;">Span 2</span> 
+     
+     questo testo segue gli spans
+
+</div>
+
+
+
+
+<div style="width:300px; height: 100px; border: 1px solid yellow;">
+	Dentro yellow box
+</div>
+
+<div style="width:300px; height: 300px; border: 1px solid black; margin-bottom:10px; position:relative;">
+	
+	<!-- Verrà posizionato rispetto al div con contorno black in maniera float:right, 
+	 -->
+	
+	<div style="width:200px; height: 200px; border: 1px solid red; float:right">
+      red box, positionated with float:right, rispect balck relative box   		
+	</div>
+	
+	Il testo dentro il container scorre verso la parte opposta indicata da float 
+	(sinistra in questo caso)
+	
+    
+    <span style="border: 1px solid #c1c2c3;">Span 1</span>
+    <span style="border: 1px solid #c1c2c3;">Span 2</span> 
+     
+     questo testo segue gli spans
+
+</div>
+
+
+
+

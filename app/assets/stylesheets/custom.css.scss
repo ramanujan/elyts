@@ -40,7 +40,7 @@ a:hover{
   @include fancy-text_on_blue;
   color:#fff; 
   span{
-    font-size:180%;
+    font-size:130%;
     font-weight:bold;
     line-height:110%;
     margin-bottom:5%;
@@ -57,10 +57,6 @@ a:hover{
 }
 
 
-.main_nav{
-  font-size: 150%;  
-  margin-right:1.5%;
-}
 
 
 .inner_shadow{
@@ -91,8 +87,8 @@ a:hover{
 
 .signup{
   
-  font-size:220%;
-  padding:2%;
+  font-size:150%;
+  padding:1%;
 }
 
 
@@ -110,6 +106,53 @@ a:hover{
   }
   
 }
+
+// main navbar styling, sliding effects with jQuery
+
+ul#main_nav_bar{
+  list-style-type:none;
+  
+  li{
+    display:inline;
+    position:relative;
+    font-size: 150%;  
+    margin-right:1.5%;
+  }
+
+  li.slide_down{
+    font-size: 150%;  
+    margin-right:1.5%;
+    a{
+      position:relative;
+       
+    }
+    ul{
+        display:none;
+        list-style-type:none;
+        font-size:50%;
+       // border: solid 1px #c1c1c1;
+        padding:5px;
+        width:150px;
+        position:absolute;
+        top:25px;
+        left:-25px;
+        li{
+          display:block;
+          padding:3px;
+        }
+    }
+    
+  }
+
+
+}
+
+.on{
+  background:url("japanese.jpg");
+  //border:solid 1px #c1c1c1;
+}
+
+
 
 // bootstrap customization 
 

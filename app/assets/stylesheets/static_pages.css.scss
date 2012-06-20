@@ -1,3 +1,41 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// --- JQuery attempts ---
+
+// Sliding effects: pop-down login form
+
+header{
+  
+  form{
+    display:none;
+    border:solid 1px #c1c1c1;
+    position:absolute;
+    top:18px;
+    left:-1px;
+    width: 320px;
+    padding:5px;
+     background:url("japanese.jpg");
+  }
+
+  ul{
+    
+    list-style-type:none;
+    
+    li{
+      float:left;
+      position:relative;
+      margin-right:5px;
+      
+    }   
+    
+    li.on{
+      border: solid 1px #c1c1c1;
+      border-bottom:none;
+       background:url("japanese.jpg");
+    }
+  
+  }
+
+}
