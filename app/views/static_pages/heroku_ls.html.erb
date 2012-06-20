@@ -1,9 +1,18 @@
 <h1 class="hero-cico">Heroku DB cross-fastweb-ls</h1>
 <hr class="h_cool_line" />
-<%@ls.split('\n').each do |line| %>
+<%@ls_assets.split('\n').each do |line| %>
 
   <div>
   	<strong><%=line%></strong>
   </div>
+
+<%end%>
+<hr class="h_cool_line" />
+
+<%@ls_images.split('\n').each do |line| %>
+
+  <p>
+  	<strong><%=line%></strong>
+  </p>
 
 <%end%>
