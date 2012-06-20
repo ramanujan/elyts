@@ -7,11 +7,16 @@ class StaticPagesController < ApplicationController
   def heroku_db_reset
     @output = `rake db:reset`
     @title="Heroku db reset" 
+    @ls = `ls -la`
   end
 
   def heroku_db_migrate
     @output = `rake db:migrate`
     @title="Heroku db migrate" 
+  end
+  
+  def heroku_ls
+     @ls = `ls -la`
   end
   
   #-------------------------------------------------------------
