@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
   end
   
   def heroku_ls
-     @ls = `ls -la`
+     @ls = `cd app/ && ls -la`
   end
   
   #-------------------------------------------------------------
