@@ -1,4 +1,40 @@
-<%iterator = ProductsIterator(@products)%>
-<% if iterator.has_next? %>
-           
+<% iterator = StoreHelper::ProductsIterator.new(@products) %>
+
+<% while iterator.has_next? 
+     products = iterator.next %>
+  
+  <!-- 
+  	   Visualizzo immagine, titolo, descrizione breve , prezzo
+  	   Ogni riga ha <= 3 prodotti. In ciascuno spazio relativo al prodotto
+  	   metto posizionato in maniera relativa al box del prodotto, un piccolo
+  	   riquadro con il prezzo. Poi in una riga sotto il titolo e la descrizione
+  	   breve...
+  	    
+  	-->           
+   
+        <div class="row-fluid">
+        	
+        	<% products.each do |product| %> 
+            	<!-- Product's data -->  
+            	<div class="span4">
+        
+                	<!-- Image and price -->
+       	        	<div class="row-fluid image_price">
+       	  
+       	            	<div class="product_image">
+       	                	<%=image_tag product.assets.first.image(:thumb)%>
+       	            	</div>
+       	            
+       	             	<div class="product_price metalic">
+                        	 <%=number_to_currency(product.price)%>
+                 	 	</div>    
+       	  
+       	        	</div>
+       	  
+            	</div> 
+
+            <%end%>
+            
+        </div>
+        <hr class="h_cool_line" />
 <%end%>

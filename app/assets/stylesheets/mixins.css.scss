@@ -33,3 +33,47 @@
   text-shadow: rgba(12,26,232,.8) 0px 1px 0px; 
 }
 
+
+
+
+
+
+
+@mixin fancy-text{
+  color:#444;  
+  font-size: 125%;
+  font-family: Georgia, serif;
+  text-shadow: rgba(255,255,255,.8) 0 1px 0; 
+}
+
+
+
+
+
+$initial:#f3f3f3;   //#ffffff;
+$final:#c6c6c6;    //#f2f2f2;
+
+@mixin cool_box{
+ //line-height:110%; 
+ padding:0.5%;
+ background: $final;
+ background: -webkit-gradient(linear, left top, right bottom, from($initial), to($final)); /* for webkit browsers */ 
+ background: -moz-linear-gradient(top,  $initial,  $final); /* for firefox 3.6+ */
+ background: -webkit-linear-gradient(top,$initial, $final);
+ background: -ms-linear-gradient(top, $initial, $final);
+ background: -o-linear-gradient(top, $initial, $final); 
+ //border-bottom: solid 1px #A1A1A1;
+ // border-right: solid 1px #A1A1A1;
+ border:solid 1px #a1a1a1;  
+
+}
+
+@mixin metalic{
+        @include cool_box;
+        @include fancy-text;
+
+       }
+ 
+ 
+
+

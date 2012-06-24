@@ -38,7 +38,7 @@ module StoreHelper
     end
     
      def number_of_products_in_the_last_row(products) 
-       products.length % QUANTITY_PER_ROW      
+       products.length % PRODUCTS_PER_ROW      
      end   
      
      def product

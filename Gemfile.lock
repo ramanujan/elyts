@@ -118,7 +118,7 @@ GEM
     premailer (1.7.3)
       css_parser (>= 1.1.9)
       htmlentities (>= 4.0.0)
-    premailer-rails3 (1.2.0)
+    premailer-rails3 (1.1.0)
       premailer (~> 1.7)
       rails (~> 3)
     rack (1.4.1)
@@ -216,7 +216,7 @@ DEPENDENCIES
   nokogiri
   paperclip (= 2.7.0)
   pg
-  premailer-rails3
+  premailer-rails3 (= 1.1.0)
   rails (= 3.2.6)
   rspec-rails (= 2.9.0)
   sass-rails (~> 3.2.3)
