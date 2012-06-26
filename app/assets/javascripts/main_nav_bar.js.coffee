@@ -1,5 +1,5 @@
 handlerInLink = ()->
-  $(this).addClass('on').next().slideDown('fast')
+  $(this).addClass('on').next().slideDown('fast',"linear")
    
 handlerOutList = ()->
   $(this).prev().removeClass('on').next().slideUp('fast')

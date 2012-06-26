@@ -13,6 +13,7 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'nokogiri'
 gem 'premailer-rails3', '1.1.0'   # Questa gem sposta lo styling dal tag <style> e lo rende inline 
                                   # This version doesn' couse problem with heroku!
+                                  
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -41,7 +42,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl'
-  gem "launchy"
+  gem "launchy"  # Se compare il problema del profilo di default imposta $LAUNCHY_BROWSER, $BROWSER
   gem 'email_spec'
   # gem 'action_mailer_cache_delivery'
 end

@@ -23,7 +23,7 @@
   <% if @utente.errors.messages[:email]%>
     <div class="field_with_errors">
   <%else%><div><%end%>
-  <%logger.info "DENTRO TEMPLATE =======> @utente.email== #{ @utente.email } "%>
+  
   <%=email_field_tag('utenti[email]',nil,value: @utente.email)%>
   </div>
 

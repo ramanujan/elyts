@@ -7,15 +7,17 @@
         <!-- Show products-->  	
     	<div class="row-fluid">
     	  <h1>
-    	  	<%=t("store.index.show",number:@products.length)%>
+    	  	<%=t("store.index.show")%> 
+    	  	<span id="number_of_products_found"><%="( #{@products.length} )"%></span>
     	  </h1>
     	</div>
         
         <hr class="h_cool_line"/>	
         
         <!-- Show products per row -->
-        <%=render 'products'%>
-        
+        <div class="row-fluid" id="store_products">
+        	<%=render 'products'%>
+        </div>
         
         
          

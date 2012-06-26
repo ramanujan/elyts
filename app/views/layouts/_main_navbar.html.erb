@@ -7,10 +7,10 @@
     	<li><%=link_to 'HOME',root_path%></li>
        
         <li id="catalog" class="slide_down">
-        	<%=link_to 'CATALOG','#'%>
+        	<%=link_to 'CATALOG','#', id: 'catalog'%>
             <ul class="actions">
               <div class="inner_shadow cico">
-                <li><%=link_to t("All products"),  store_path%></li>  
+                <li><%=link_to t("All products"),  store_index_path, id: "all_products"%></li>  
                 <hr class="h_cool_line" />
                 <li><%=link_to t("bluetooth"),'#'%></li>
                 <li><%=link_to t("phone"),    '#'%></li>
@@ -29,4 +29,4 @@
  </div>
 
 </div>
-
+<br />

@@ -36,3 +36,10 @@ Elyts::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end
+
+# LAUNCHY default profile problem FIX
+
+chrome_path = `which google-chrome`.strip
+ENV["LAUNCHY_BROWSER"] = chrome_path
+ENV["BROWSER"] = chrome_path
+

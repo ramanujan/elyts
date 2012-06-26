@@ -17,5 +17,6 @@
 //=require    images
 //=require    static_pages
 //=require    main_nav_bar
+//=require    store
 //=require    custom
 

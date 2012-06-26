@@ -144,4 +144,4 @@ en:
   
   store:
     index:
-      show: "Selected products (%{number})"
+      show: "Selected products "

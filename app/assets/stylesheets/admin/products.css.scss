@@ -57,7 +57,7 @@ input.inventory{
 }
 
 .product_description_small{
-  font-weight:bold;
+  font-weight:bold; 
 }
 
 
@@ -77,16 +77,25 @@ input.inventory{
 
 .product_image{
   
-  
+    
 }
 
 .product_price{
   position:absolute;
-  top:90%;
-  left:0;
+  top:83%;
+  left:0%;
   @include metalic;
+  padding:2%;
+  font-size: 150%;
+  font-weight:bold;
+ 
 }
 
 .image_price{
   position:relative;  
+}
+
+.product_title{
+  font-size:200%;
+  margin-bottom:5%;
 }

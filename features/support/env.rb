@@ -110,5 +110,5 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 #If you want to use chrome with selenium
 
 #Capybara.register_driver :selenium do |app|
-#  Capybara::Selenium::Driver.new(app, :browser => :chrome)
-#end
+ # Capybara::Selenium::Driver.new(app, :browser => :chrome)
+# end

@@ -7,7 +7,7 @@ module Admin::ProductsHelper
         message
       when 'create_success'
         message=t("admin.products.create.success",:title=>@product.title);
-        message+=" "+view_context.link_to( t("admin.products.create.where"),'#' ) 
+        message+=" "+view_context.link_to( t("admin.products.create.where"),store_index_path ) 
         message+=t("admin.products.create.or")
         message+=view_context.link_to( t("admin.products.create.another") , new_admin_product_path ) 
         message

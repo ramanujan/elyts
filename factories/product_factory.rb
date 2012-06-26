@@ -5,5 +5,5 @@ Factory.define :product do |product|
   product.description "Deliciuos vegetables, used among other things,for Tzazichi sauce"
   product.price 1.50
   product.inventory 10
-
+ 
 end

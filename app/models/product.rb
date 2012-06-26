@@ -13,12 +13,18 @@
 
 class Product < ActiveRecord::Base
   
-  has_many :assets
+  has_many :assets  
   validates :title, presence:true
   validates :description, presence:true
   validates :price, presence:true,numericality:{greater_than_or_equal_to:0.01} 
   validates :inventory, presence:true,numericality:{greater_than_or_equal_to:0} 
   accepts_nested_attributes_for :assets
+  
+  def self.search(key) 
+    key="%#{key}%"
+    where("title like :title or description like :description",title:key,description:key)
+    .order('title desc').all
+  end
    
 end
 

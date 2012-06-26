@@ -9,8 +9,10 @@
             <div class="nav-collapse">
             	
             	<ul class="nav">
-                	<li class="active"><%=link_to t('store_link'),'#'%></li>
-                    <li class="active"><%=link_to t('admin_store_link'),admin_products_path%></li>   
+                	<li class="active"><%=link_to t('store_link'),store_index_path%></li>
+                    <% admins_only do  %> <!--See application helper -->
+                      <li class="active"><%=link_to t('admin_store_link'),admin_products_path%></li>   
+                    <%end%>
                 </ul>
                 
                 <ul class="nav pull-right"> 
@@ -21,15 +23,18 @@
                       <li><%=link_to t('logout'), session_path('remove_session'), method:'delete' %></li>
                     <%end%>
                 </ul> 
-                 
-             
+              
+                <%=form_tag search_store_index_path,    :method =>'get', 
+                                                        :id     =>'search_product',
+                                                        :class  =>"navbar-search pull-right" do %>
                 
-                <form class="navbar-search pull-right" id="search_product">
-            		
-            		<input type="text" class="search-query" placeholder="Search">
-            		
-                </form>
-               
+                     <%= text_field_tag :search_product,nil,
+                                        :placeholder=>'Search',
+                                        :class=>"search-query" %>
+                   
+                  <%end%>
+                 
+              
                 <p class="icon-search icon-white pull-right"></p> 
                 <p class="divider-vertical pull-right"></p>
                 <%if logged_in? %>

@@ -6,6 +6,7 @@ Given(/^I am on the (.+)$/) do |page_name|
  # in cucumber tramite World() messo in paths.rb
  
  visit path_to(page_name) 
+
 end
 
 When(/^I follow "([^"]*)"$/) do |link|

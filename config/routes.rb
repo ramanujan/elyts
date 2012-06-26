@@ -1,7 +1,47 @@
+=begin
+   
+    Get,Post, Put, Delete, Anything
+    
+    Possiamo definire routes che rispondono solo ai verbi HTTP GET,POST,PUT,DELETE con gli omonimi 
+    metodi di Rails get,post,put,delete. Tutti questi metodi utilizzano la stessa sintassi, e lavorano 
+    in maniera molto simile, me definiscono routes che rispondono solo a determinati verbi. Se non 
+    importa a quali verbi dobbiamo rispondere e cioè rispondiamo con la stessa azione a tutti i verbi, 
+    dobbiamo utilizzare il match(). 
+    
+     match "some/route", :to=>"some#controller_action"
+    
+    Questo route risponde a tutti i verbi: GET,POST,PUT,DELETE . Se desideriamo, possiamo utilizzare 
+    match() in maniera equivalente a post(), put(), get() e delete():doc:
+    
+     match "some/route", :to=>"some#controller_action", :conditions=>{:method=>:get}    
+       
+    Ricordiamo poi che ad esempio queste linee equivalgono:
+    
+    get "pages/jquery" <===> get 'pages/jquery, :to=>"pages#jquery",:as=>"pages_jquery" 
+     
+    get "pages/jquery" <===> get 'pages/jquery, => "pages#jquery" 
+    
+    get "pages/jquery" <===> match "pages/jquery", :to=>"pages#jquery", :conditions=>{:method=>:get}
+    
+    
+      
+       
+=end
+
+
 Elyts::Application.routes.draw do
  
-  get "store/index", as: 'store'
-
+  
+  
+  resources :store do
+    collection do
+      get :async_index    
+      get :search
+    end
+    
+  end
+  
+  
   get "images/new"
 
   get "static_pages/home"
@@ -29,7 +69,10 @@ Elyts::Application.routes.draw do
   
   get '/utenti/:token/confirm', to: 'sessions#confirm_account_and_login', as: 'confirm_account'
   
-  root :to => 'static_pages#home'
+ 
+  # index root path
+  
+  root :to => 'store#index'
  
   namespace :admin do
    root to: 'base#index'
@@ -75,5 +118,8 @@ edit_admin_product GET    /admin/products/:id/edit(.:format) admin/products#edit
 =end
 
   resources :sessions, only: [:new, :create, :destroy]
-
+  
 end
+
+
+

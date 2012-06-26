@@ -1,12 +1,27 @@
 <div class="row-fluid">
-	<div class="span10">
+	<div class="span8">
 		<h1 class="elyts"><%=t("base_title")%><%=image_tag("red_flower.png")%></h1>
     </div>
+    
     <%unless logged_in? || ( params[:controller]=='sessions' && (params[:action]=='new' || params[:action]='create') ) %>
-      <div class="span2">
-        <%=link_to t("login"),
+    
+       <div class="span2">
+
+         <%=link_to t("login"),
     		      new_session_path,
     		      class:"btn login"%>
-      </div>
+      
+       </div> 
+      
+       <%unless params[:controller]=='utenti' && params[:action]=='new'%>
+         <div class="span2">
+         	<%=link_to t("home_signup"),
+    		          	  new_utente_path,
+    		        	  class:"btn btn-danger signup"%>
+         </div>
+       
+       <%end%>
+    
     <%end%>
+
 </div>

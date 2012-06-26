@@ -1,3 +1,9 @@
+<%=javascript_tag do %>
+                    
+  window.products = "<%= @products.length %>"
+
+<%end%>    
+
 <% iterator = StoreHelper::ProductsIterator.new(@products) %>
 
 <% while iterator.has_next? 
@@ -17,22 +23,47 @@
         	<% products.each do |product| %> 
             	<!-- Product's data -->  
             	<div class="span4">
-        
-                	<!-- Image and price -->
-       	        	<div class="row-fluid image_price">
+                	
+                	<!-- Row for image and price -->
+                	<div class="row-fluid">
+                		
+       	        		<div class="row-fluid image_price">
        	  
-       	            	<div class="product_image">
-       	                	<%=image_tag product.assets.first.image(:thumb)%>
-       	            	</div>
+       	            		<div class="product_image">
+       	                	   
+       	                		<% if product.assets.any? %>
+       	                			<%=image_tag product.assets.first.image(:medium)%>
+       	            		    <%else%>
+       	            		      <%=image_tag 'medium/missing.png'%>
+       	            		    <%end%>
+       	            		
+       	            		</div>
        	            
-       	             	<div class="product_price metalic">
-                        	 <%=number_to_currency(product.price)%>
-                 	 	</div>    
+       	             		<div class="product_price metalic">
+                        		<%=number_to_currency(product.price)%>
+                 	 		</div>    
        	  
-       	        	</div>
+       	        		</div>
        	  
-            	</div> 
-
+            	 	</div> 
+                    
+                    <!-- Row for title and brief description -->
+                    <br />
+                    <div class="row-fluid">
+                		
+       	        		<div class="product_title">
+       	        	      <%=link_to(product.title,'#')%>            		
+       	        		</div>
+       	              
+       	                <div class="product_description_small">
+       	        	      <%= sanitize( brief( product.description ) )%>            		
+       	        		</div>
+       	                
+       	                
+       	                
+            	 	</div> 
+                
+                </div> 
             <%end%>
             
         </div>
