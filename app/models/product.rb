@@ -22,7 +22,10 @@ class Product < ActiveRecord::Base
   
   def self.search(key) 
     key="%#{key}%"
-    where("title like :title or description like :description",title:key,description:key)
+    # Si noti che ho utilizzato la funzione upper (presente in sql standard) perchè pgsql è 
+    # case-sensitive, mentre ad esempio sqlite non lo è 
+    
+    where("upper(title) like upper(:title) or upper(description) like upper(:description)",title:key,description:key)
     .order('title desc').all
   end
    
