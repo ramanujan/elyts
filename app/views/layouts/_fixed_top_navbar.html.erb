@@ -20,7 +20,7 @@
                		<li class="active"><%=link_to t('support'),'#'%></li>
                     <li><%=link_to t('account'),'#'%></li>
                     <%if logged_in? %>
-                      <li><%=link_to t('logout'), session_path(1), method:'delete' %></li>
+                      <li><%=link_to t('logout'), signout_path, method:'delete' %></li>
                     <%end%>
                 </ul> 
               
