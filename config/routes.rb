@@ -52,6 +52,8 @@ Elyts::Application.routes.draw do
   
   get '/heroku_ls', to:"static_pages#heroku_ls"
   
+  get '/heroku_rake_routes', to:"static_pages#heroku_rake_routes"
+  
   # JQuery attempts
   get '/jquery_sliding_effects', to: "static_pages#jquery_sliding_effects"
   
@@ -118,7 +120,9 @@ edit_admin_product GET    /admin/products/:id/edit(.:format) admin/products#edit
 =end
 
   resources :sessions, only: [:new, :create, :destroy]
-  
+
+  match '/signout', to: 'sessions#destroy', via: :delete
+
 end
 
 
