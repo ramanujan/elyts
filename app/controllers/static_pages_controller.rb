@@ -21,6 +21,11 @@ class StaticPagesController < ApplicationController
      @ls_compiled_assets = `cd public/assets/ && ls -la`
   end
   
+  def heroku_rake_routes
+    @rake_routes = `rake routes`
+  end
+  
+  
   #-------------------------------------------------------------
   
   def jquery_sliding_effects
