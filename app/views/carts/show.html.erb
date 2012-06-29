@@ -1,0 +1,47 @@
+<%=render 'layouts/header' %> 
+  <div class="row-fluid">
+    <div class="outer_shadow span12">
+	  <div class="inner_shadow span12 cico">
+	    
+	    <!--index heading and shopping cart review -->
+	      <div class="row-fluid"> 
+	        
+	        <div class="span8">
+	           
+	          <h1><%= t("carts.show.heading") %> </h1>
+	          <p><%= link_to t("carts.show.continue_shopping"),store_index_path  %> </p>
+	        
+	        </div>
+	          
+	        <!-- Shopping cart -->	
+	          
+	        <div class="span4">
+	          	
+	          <div class="row-fluid">
+	            
+	            <div class="span2">
+	              <%= image_tag "shopping.png" %>
+	            </div>
+	              
+	            <div class="span8 carts_shopping">
+	              <span class="carts_number_of_items"><%= @line_items.length %></span>
+	              <%=t("carts.show.items_in_your_cart")%>   
+	            </div>
+	            
+	         </div>
+	            
+	        </div>
+	          
+	      </div>	
+		  
+		  <hr class="h_cool_line" />
+    
+          <!-- List of selected items -->
+	      <%=render @line_items%>
+	      
+    
+    </div>
+  
+  </div>
+
+        

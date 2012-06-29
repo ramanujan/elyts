@@ -1,7 +1,20 @@
 class StoreController < ApplicationController
-
+  
+  before_filter :find_product, only:[:show]
+ 
+   
+  def find_product
+     begin
+       @product = Product.find(params[:id])
+     rescue
+       @title= t("products.unavailable") 
+       create_product_flash_message('find_error','block')  
+       redirect_to store_path
+    end
+  end
+   
   def index
-    # @title=t("store.index") 
+    @title=t("store.index.title") 
     @products = Product.includes(:assets).all # Evita N+1 count(*)
   
   end
@@ -13,6 +26,7 @@ class StoreController < ApplicationController
   end
 
   def show
+     @title=t("store.show.title",title:@product.title)
         
   end
   
@@ -23,5 +37,7 @@ class StoreController < ApplicationController
     ( params[:template] == 'search' ) ? (render partial: 'store/products') : ( render( 'store/index') )  
     
   end
+
+  private :find_product
 
 end

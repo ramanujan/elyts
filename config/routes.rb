@@ -32,6 +32,8 @@
 Elyts::Application.routes.draw do
  
   
+  resources :line_items, only:[:create]
+  resources :carts, only:[:show]
   
   resources :store do
     collection do

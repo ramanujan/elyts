@@ -55,7 +55,7 @@ class Asset < ActiveRecord::Base
  belongs_to :product
  
  has_attached_file :image, 
-                   :styles => { :large=>"600x600!",:medium => "300x200!", :thumb => "100x100!" },
+                   :styles => { :large=>"640x480!",:medium => "300x200!", :thumb => "100x100!" },
                    :default_url => "/images/medium/missing.png"
 
 

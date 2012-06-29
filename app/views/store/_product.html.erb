@@ -1,0 +1,53 @@
+<div class="row-fluid">
+
+  <div class="span8">
+  
+    <%if @product.assets.any? %>
+	  <%= render :partial=>'admin/products/carousel', :locals=>{:size=>:large}%>
+	<%else%>
+	  <%=image_tag("thumb/missing.png")%>
+	<%end%>    
+  
+  </div>
+
+  <div class="span4">
+  	
+  	<div class="row-fluid">
+    	<span class="product_title"><%=@product.title%></span>
+    	
+  	</div>    
+    
+    <hr class="h_cool_line" />	
+    
+    <div class="row-fluid">
+    
+      <div class="product_description_small">
+        <%=sanitize(@product.description)%>
+      </div>
+    
+    </div>
+    
+    <hr class="h_cool_line" />	
+    
+    <div class="row-fluid">
+    
+      <div class="span6">
+      
+      	<span class="product_price_small"> <%=number_to_currency(@product.price)%></span>
+        
+      </div>
+
+      <div class="span6">
+       <%=link_to t("add_to_cart"),
+    		      line_items_path(product_id:@product.id),
+    		      method: :post,
+    		      class:"btn-primary btn-large"%>
+      </div>    
+    
+    </div>
+    
+    
+  </div> 
+
+
+</div>

@@ -5,6 +5,7 @@ Voglio poter accedere ad un catalogo di prodotti
 In modo da poter scegliere un prodotto da inserire nel carrello della spesa
 
 @javascript
+
 Scenario: View all products
   Given there is a product named "Faberge Egg"
   And there is a product named "Popinga"

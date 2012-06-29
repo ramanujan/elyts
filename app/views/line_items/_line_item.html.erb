@@ -1,0 +1,54 @@
+<div class="row-fluid">
+	
+	<!-- Image -->
+	<div class="span2">
+    
+     <%if line_item.product.assets.any? %>
+       <%=image_tag line_item.product.assets.first.image(:thumb)%>	
+     <%else%>
+       <%=image_tag "thumb/missing.png"%>
+     <%end%> 
+    </div>	
+	
+	<!-- Title -->
+	<div class="span2">
+	  <%=link_to( store_path(line_item.product) ) do %>
+	    <h2><%=line_item.product.title%></h2>
+	  <%end%> 
+	</div>
+	
+	<!--Description -->
+	<div class="span3 line_item_description_small">
+	  <%=brief(sanitize(line_item.product.description))%>
+	</div>
+	
+	<!-- Price -->
+	<div class="span2">
+    
+     <div class="line_item_heading">
+     	PRICE
+     </div> 
+     
+     <div>  
+       <span class="line_item_value"><%=number_to_currency(line_item.product.price) %></span> 
+     </div>
+    
+    </div>
+	
+	<!-- Quantity -->
+	<div class="span2">
+	  <div class="line_item_heading">
+     	QUANTITY
+     </div>
+	  <span class="line_item_value"><%=line_item.quantity%></span>
+	</div>
+	
+	<!-- Total -->
+	<div class="span1">
+    <div class="line_item_heading">
+     	TOTAL
+     </div>
+    </div>
+	
+</div>
+<hr class="h_cool_line" />

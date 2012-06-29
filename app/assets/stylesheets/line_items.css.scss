@@ -1,0 +1,24 @@
+// Place all the styles related to the line_items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'mixins';
+.line_item_description_small{
+   @include fancy-text;
+   line-height:120%;
+}
+
+.line_item_heading{
+  font-size: 150%;
+  font-weight:bold;
+   //@include metalic;
+   padding: 2%;
+   
+}
+
+.line_item_value{
+  margin-left:3%;
+ 
+}
+
+

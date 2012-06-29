@@ -13,7 +13,7 @@
 	            
 	             <%if @product.assets.any? %>
 	              <div class="span4">
-	              	<%= render 'carousel'%>
+	              	<%= render :partial=>'carousel',locals:{size: :medium }%>
 	              </div>
 	             <%else%>
 	               <%=image_tag("thumb/missing.png")%>

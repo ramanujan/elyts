@@ -16,4 +16,7 @@
  *=require utenti
  *=require sessions 
  *=require static_pages
+ *=require carts
+ *=require store
+ *=require line_items
 */

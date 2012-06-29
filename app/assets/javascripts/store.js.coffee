@@ -29,21 +29,33 @@ search = ->
         });
       
       else $("form#search_product").submit()
-  )  
+    )  
 
 
-$(->
+allProductsHandler = ()->
   $('#all_products').click((e)->
-    e.preventDefault()
-    $.ajax({
-      type: 'GET',
-      url: '/store/async_index/',
-      success: (data)-> 
-        dataZone = $('#store_products')
-        dataZone.html(data)   
-        $('#number_of_products_found').text("("+window.products+")")
-      });  
+    if  $('#store_products').length > 0
+      value = "ajax"
+    else
+      value = "normal"  
+     
+    if (value == "ajax")
+      e.preventDefault()
+     
+      
+      $.ajax({
+        type: 'GET',
+        url: '/store/async_index'
+        dataType: 'html', # <=== Lo puoi fare solo se imposti content_type dal metodo render:
+        success: (data)->
+          $('#store_products').html(data)
+          $('#number_of_products_found').text("("+window.products+")")
+        });
+
+   
   )
 
+$(->
   search();
+  allProductsHandler();
 )

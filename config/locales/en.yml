@@ -9,6 +9,7 @@ en:
   support: "Support"
   account: "Account"
   logout: "Logout"
+  add_to_cart: "Add To Cart"
   logged_in : "Logged as"
   home_heading: "ELYTS E-Commerce environment"
   presentation: "Do real collaborative e-commerce with ELYTS!"
@@ -141,7 +142,16 @@ en:
     create:
       auth_error: "Authentication error"
       confirm_required: "An email with istructions was sended to your account, please follow the istructions there and confirm your account before login"
+  carts:
+    show:
+      title: "Your shopping cart"
+      heading: "Shopping cart"
+      items_in_your: "products in your shopping cart"
+      continue_shopping: "Continue Shopping" 
   
   store:
     index:
       show: "Selected products "
+    show:
+      title: "Show product %{title} "
+      heading: "Showing << %{title} >> "  

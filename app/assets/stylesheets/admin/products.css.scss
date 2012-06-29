@@ -58,6 +58,8 @@ input.inventory{
 
 .product_description_small{
   font-weight:bold; 
+  @include fancy-text;
+  line-height:120%;
 }
 
 
@@ -90,6 +92,14 @@ input.inventory{
   font-weight:bold;
  
 }
+
+.product_price_small{
+  font-size: 150%;
+  font-weight:bold;
+   //@include metalic;
+   padding: 2%;
+}
+
 
 .image_price{
   position:relative;  
