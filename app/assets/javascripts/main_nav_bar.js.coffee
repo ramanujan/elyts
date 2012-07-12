@@ -15,7 +15,7 @@ handlerOutLink = ()->
     unless $('.slide_down ul').data('on_list')
       $('.slide_down a').removeClass('on').next().slideUp('fast') 
       clearTimeout(timeout)  
-  ,30
+  ,300
   )  
 
 

@@ -1,4 +1,5 @@
 
+
 =begin
    
    Si noti che il comando 'rails g controller admin/products' genera questo controllore nel modulo

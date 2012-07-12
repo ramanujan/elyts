@@ -38,11 +38,14 @@
       </div>
 
       <div class="span6">
-       <%=link_to t("add_to_cart"),
-    		      line_items_path(product_id:@product.id),
-    		      method: :post,
-    		      class:"btn-primary btn-large"%>
+         <%=link_to line_items_path(product_id:@product.id), method: :post, id: 'add_to_cart', :class=>"btn btn-primary btn-large" do%>
+		   	      <i class="icon-shopping-cart icon-white"></i>
+		   	      <%=t("add_to_cart")%>
+		   	    <%end%>
       </div>    
+    
+     
+    
     
     </div>
     

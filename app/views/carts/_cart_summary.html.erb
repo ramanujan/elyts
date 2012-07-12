@@ -1,0 +1,36 @@
+<!-- Shopping cart -->	
+<div class="span4">
+	
+	<div class="row-fluid">
+	
+		<div class="span2">
+			<%= image_tag "shopping.png" %>
+	    </div>
+	              
+	    <div class="span8 carts_shopping">
+	    	<div id="carts_explanation">
+	    	  <span class="carts_number_of_items"><%= @line_items_count %></span>
+	    	  <%= (@line_items_count > 1) ? t("carts.show.items_in_your_cart") : t("carts.show.item_in_your_cart") %>   
+	        </div>
+	    </div>
+	            
+	 </div>
+     
+     <div class="row-fluid">
+     
+       <div class="span6">
+         <span class="carts_show_left"><%= link_to t("carts.show.view_your_cart"), cart_path(@cart)%>  </span>
+       </div>
+     
+        <div class="span6">
+         <span class="carts_show_right"><%=link_to t("carts.show.checkout"), '#' %>  </span>
+       </div>
+     
+     </div>
+     
+
+</div>
+	          
+	      
+	      
+		  

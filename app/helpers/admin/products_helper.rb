@@ -1,5 +1,7 @@
 module Admin::ProductsHelper
   
+  
+ 
   def create_product_flash_message(action,type,flash_type=:normal) 
     result=case action 
       when 'find_error'
@@ -30,6 +32,5 @@ module Admin::ProductsHelper
        (flash.now[type.to_sym]=message.html_safe)
   
    end
-
   
 end

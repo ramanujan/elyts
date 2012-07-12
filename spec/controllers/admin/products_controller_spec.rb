@@ -18,17 +18,17 @@ require 'spec_helper'
 describe Admin::ProductsController do
 
  let(:product) do
-    Factory.create(:product)
+    FactoryGirl.create(:product)
   end
   
   let(:user) do
-    user=Factory.create(:utente)
+    user=FactoryGirl.create(:utente)
     user.confirm!
     user
   end 
   
   let(:admin) do
-    user=Factory.create(:utente)
+    user=FactoryGirl.create(:utente)
     user.confirm!
     user.admin!
     user

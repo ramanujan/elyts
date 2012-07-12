@@ -7,6 +7,7 @@
 #  updated_at :datetime        not null
 #  product_id :integer
 #  cart_id    :integer
+#  quantity   :integer         default(1)
 #
 
 class LineItem < ActiveRecord::Base

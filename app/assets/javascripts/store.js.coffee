@@ -55,7 +55,30 @@ allProductsHandler = ()->
    
   )
 
+addProductToCartHandler = ()->
+  $('#add_to_cart').click((event)->
+   
+    $.ajax(
+      {
+        type: 'POST',
+        url: '/line_items.json'
+        #dataType: 'json', # <=== Lo puoi fare solo se imposti content_type dal metodo render:
+        data: {product_id:product_id}
+      
+        success: (data)->
+                        #created_line_item = $.parseJSON( data )
+            $('.carts_number_of_items').html(data.number_of_items)
+            $('#carts_explanation').effect("pulsate",{times:2}, 200)
+      });
+    
+    event.preventDefault()
+    return false
+    
+  )
+
+
 $(->
   search();
   allProductsHandler();
+  addProductToCartHandler();
 )

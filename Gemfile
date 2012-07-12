@@ -9,6 +9,7 @@ gem "taps"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+gem 'jquery-ui-themes'
 gem "paperclip", "2.7.0" # :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'bcrypt-ruby', '3.0.1'
 gem 'nokogiri'

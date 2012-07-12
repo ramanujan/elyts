@@ -6,11 +6,17 @@
     	
         <!-- Show products-->  	
     	<div class="row-fluid">
-    	  <h1>
-    	  	<%=t("store.index.show")%> 
-    	  	<span id="store_number_of_products_found"><%="( #{@products.length} )"%></span>
-    	  </h1>
-    	</div>
+    	  
+    	  <div class="span8">
+    	  	<h1>
+    	  		<%=t("store.index.show")%> 
+    	  		<span id="store_number_of_products_found"><%="( #{@products.length} )"%></span>
+    	  	</h1>
+    	  
+    	  </div>
+           
+           <%=render "carts/cart_summary"%>  
+        </div>
         
         <hr class="h_cool_line"/>	
         

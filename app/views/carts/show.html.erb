@@ -24,14 +24,19 @@
 	            </div>
 	              
 	            <div class="span8 carts_shopping">
-	              <span class="carts_number_of_items"><%= @line_items.length %></span>
-	              <%=t("carts.show.items_in_your_cart")%>   
+	              <span class="carts_number_of_items"><%= @line_items_total_quantity %></span>
+	             
+	              <%= (@line_items_total_quantity > 1) ? t("carts.show.items_in_your_cart") 
+	                                                          : t("carts.show.item_in_your_cart") %>   
 	            </div>
 	            
 	         </div>
 	            
 	        </div>
 	          
+	      
+	      
+	      
 	      </div>	
 		  
 		  <hr class="h_cool_line" />
@@ -39,6 +44,43 @@
           <!-- List of selected items -->
 	      <%=render @line_items%>
 	      
+	      <!-- Credit cards image and Save Changes -->
+	      	
+	      <%if @line_items.length > 0 %>
+	        <div class="row-fluid">
+	        
+	          <div class="span8">
+	            <%=image_tag('am_ex.png')%>
+	            <%=image_tag('cirrus.png')%>
+	            <%=image_tag('discover.png')%>
+	            <%=image_tag('google.png')%>
+	            <%=image_tag('maestro.png')%>
+	            <%=image_tag('mastercard.png')%>
+	            <%=image_tag('paypal.png')%>	
+	          </div>
+	          
+	          <div class="span2">
+	          
+	            <%=link_to '#', method: :post, :class=>"btn btn-primary btn-large" do%>
+		   	      <i class="icon-chevron-down icon-white"></i>
+		   	      <%=t("carts.show.save_changes")%>
+		   	    <%end%>
+	          
+	          </div> 
+	        
+	          
+	          <div class="span2">
+	          
+	            <%=link_to '#', method: :post, :class=>"btn btn-primary btn-large" do%>
+		   	      <i class="icon-chevron-down icon-white"></i>
+		   	      <%=t("carts.show.save_and_checkout")%>
+		   	    <%end%>
+	          
+	          </div> 
+	        
+	        
+	        </div>
+	      <%end%>
     
     </div>
   
